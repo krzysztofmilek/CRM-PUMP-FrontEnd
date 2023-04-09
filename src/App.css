@@ -1,0 +1,136 @@
+.App {
+  text-align: left;
+  display: block;
+  justify-content: center;
+  border:0px solid red;
+}
+
+.containerCard {
+  margin-top: 20px;
+  margin-bottom: 100px;
+  border: 0px solid grey;
+  border-radius: 15px;
+  padding: 25px
+}
+
+.analiticUserContainer {
+  display: inline-block;
+  border: 1px solid gray;
+  margin: 15px;
+  padding: 25px;
+  border-radius: 15px;
+  height: 300px;
+  width:292px;
+  box-shadow:inset;
+
+}
+
+.analiticUserBox {
+  display: flex;
+  text-align: left;
+  vertical-align: top;
+  justify-content: center;
+}
+
+.red {
+  color: red;
+  font-weight: 500;
+}
+
+.container {
+
+  border-radius: 10px;
+  margin-top: 15px;
+  padding-top: 15px;
+}
+
+.containerBody {
+  border: 1px solid grey;
+
+}
+.loginNavBar{
+  width:100% !important;
+  border:0px solid red;
+  padding: 5px;
+padding-right: 150px;
+  font-weight: 500;
+  text-align: end;
+}
+.up {
+  padding-top: 10px;
+  border: 0px solid red;
+
+  text-align: center;
+}
+
+.down {
+  padding-bottom: 0px;
+  border: 0px solid red;
+}
+
+.pad10 {
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 0px solid red;
+}
+
+h4 {
+  text-transform: uppercase;
+}
+
+.getCenter {
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.getLeft {
+  text-align: left;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+.getRight {
+  text-align: right;
+  padding-bottom: 0px;
+  padding-right: 25px !important;
+  margin-bottom: 0px;
+
+}
+
+.tableFontSize {
+  font-size: 0.85em;
+
+}
+
+.btnFull {
+  font-weight: 500;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  width: 200px;
+  padding: 5px;
+  margin: 5px;
+  border: 2px solid gray;
+  border-radius: 10px;
+
+
+}
+li{
+  text-align: left !important;
+}
+
+@media all and (max-width:800px) {
+
+  .analiticUserBox {
+  display: block;
+  justify-content: center;
+  text-align: center;
+
+  }
+
+li{
+  text-align: left !important;
+}
+
+}
