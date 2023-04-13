@@ -37,7 +37,7 @@ const TableCustomers = (props) => {
             {props.customer
               .filter((cust) => {
                 return (
-                  (cust.data.substring(0, 10) < start.substring(0, 10)) &
+                  (cust.data < start) &
                   (cust.agreement_1 === true)
                 );
               })
@@ -47,7 +47,7 @@ const TableCustomers = (props) => {
                   <td className="col-2 tableFontSize">{cust.phone}</td>
                   <td className="col-2 tableFontSize">{cust.email}</td>
                   <td className="col-2 tableFontSize">
-                    {cust.data.substring(0, 10)}
+                    {cust.data}
                   </td>
 
                   <td className="col-3 getCenter">
@@ -80,7 +80,7 @@ const TableCustomers = (props) => {
             {props.customer
               .filter((cust) => {
                 return (
-                  (cust.data.substring(0, 10) === start.substring(0, 10)) &
+                  (cust.data === start) &
                   (cust.agreement_1 === true)
                 );
               })
@@ -90,7 +90,7 @@ const TableCustomers = (props) => {
                   <td className="col-2 tableFontSize">{cust.phone}</td>
                   <td className="col-2 tableFontSize">{cust.email}</td>
                   <td className="col-2 tableFontSize">
-                    {cust.data.substring(0, 10)}
+                    {cust.data}
                   </td>
                   <td className="col-3 getCenter">
                     <OverlayTrigger
@@ -123,7 +123,7 @@ const TableCustomers = (props) => {
             {props.customer
               .filter((cust) => {
                 return (
-                  (cust.data.substring(0, 10) > start.substring(0, 10)) &
+                  (cust.data > start) &
                   (cust.agreement_1 === true)
                 );
               })
@@ -133,7 +133,7 @@ const TableCustomers = (props) => {
                   <td className="col-2 tableFontSize">{cust.phone}</td>
                   <td className="col-2 tableFontSize">{cust.email}</td>
                   <td className="col-2 tableFontSize">
-                    {cust.data.substring(0, 10)}
+                    {cust.data}
                   </td>
                   <td className="col-3 getCenter">
                     <OverlayTrigger
