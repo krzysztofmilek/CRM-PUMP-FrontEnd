@@ -6,13 +6,13 @@ import { useState } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
-function ModalDelete(post) {
+function ModalDeleteCustomer(post) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const userDelete = async () => {
-    await axios.delete("http://localhost:8080/delete/" + post.post._id);
+  const customerDelete = async () => {
+    await axios.delete("http://localhost:8080/customer/delete/" + post.post._id);
     setShow(false);
     post.getUsers();
   };
@@ -21,7 +21,7 @@ function ModalDelete(post) {
       <OverlayTrigger
         key="top"
         placement="top"
-        overlay={<Tooltip id="tooltip-top">Usuń użytkownika</Tooltip>}
+        overlay={<Tooltip id="tooltip-top">Usuń Klienta</Tooltip>}
       >
         <img
           className="imgTable"
@@ -44,7 +44,7 @@ function ModalDelete(post) {
           <Button variant="outline-success" onClick={handleClose}>
             Anuluj
           </Button>
-          <Button variant="outline-danger" onClick={() => userDelete()}>
+          <Button variant="outline-danger" onClick={() => customerDelete()}>
             Usuń
           </Button>
         </Modal.Footer>
@@ -53,4 +53,4 @@ function ModalDelete(post) {
   );
 }
 
-export default ModalDelete;
+export default ModalDeleteCustomer;

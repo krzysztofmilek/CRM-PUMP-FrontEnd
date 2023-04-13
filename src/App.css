@@ -19,11 +19,33 @@
   margin: 15px;
   padding: 25px;
   border-radius: 15px;
-  height: 300px;
+  min-height: 300px;
   width:292px;
   box-shadow:inset;
 
 }
+.imgTable{
+  height: 30px;
+  cursor: pointer;
+
+}
+hr{
+
+  font-size: 0.3em;
+  height:2px;
+  margin: 1em !important;
+  padding-bottom: 10px;
+}
+.tittle{
+  font-size: 1.0em;
+  text-transform: uppercase;
+  margin-top: 25px;
+  margin-bottom: 0px;
+  padding-bottom:0px;
+  font-weight: 700;
+}
+
+
 
 .analiticUserBox {
   display: flex;
@@ -59,7 +81,6 @@ padding-right: 150px;
 .up {
   padding-top: 10px;
   border: 0px solid red;
-
   text-align: center;
 }
 
@@ -80,7 +101,7 @@ h4 {
 
 .getCenter {
   text-align: center;
-  padding-bottom: 50px;
+ 
 }
 
 .getLeft {
@@ -120,7 +141,32 @@ li{
   text-align: left !important;
 }
 
-@media all and (max-width:800px) {
+.input-group{
+  display: flex;
+  align-content: stretch;
+}
+
+
+/**
+ * Even when I set some dimension-related styles on this
+ * element but not on the input or button, they'll still
+ * line up.
+ */
+.input-group-addon {
+  background: #eee;
+  border: 1px solid #ccc;
+  padding: 0em 1em;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.input-search{
+  min-width:80% !important;
+  margin-top: 0px;
+  height: 35px;
+
+}
+
+@media all and (max-width: 992px) {
 
   .analiticUserBox {
   display: block;
@@ -133,4 +179,17 @@ li{
   text-align: left !important;
 }
 
+tr td:nth-of-type(2) {
+  display: none;
 }
+tr td:nth-of-type(3) {
+  display: none;
+}
+tr td:nth-of-type(4) {
+  display: none;
+}
+
+}
+
+
+

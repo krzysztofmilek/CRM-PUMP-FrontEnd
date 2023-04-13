@@ -10,9 +10,9 @@ function ModalInfo(post) {
     console.log("props", post); 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-setShow(post.true)
+    setShow(post.true)
     //const handleShow = () => setShow(true);
-console.log("post",post)
+     console.log("post",post)
         return (
             <div>
                 <Modal show={show} onHide={handleClose}>
