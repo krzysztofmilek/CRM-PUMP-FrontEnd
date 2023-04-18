@@ -4,13 +4,14 @@ import { Container } from "react-bootstrap";
 import AnaliticUserTop from "./AnaliticUserTop";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import NavBar from "./NavBar";
 
 const TableCustomers = (props) => {
   // eslint-disable-next-line
   const [cust, setCust] = useState({});
 
-  const start = new Date().toISOString();
-  console.log(start);
+  const start = new Date().toISOString().substring(0,10);
+  console.log("data to string",start.toString());
   console.log(props.customer);
 
   const handleShow = (cust) => {
@@ -24,6 +25,7 @@ const TableCustomers = (props) => {
 
   return (
     <Container>
+      <NavBar />
       <div className="up">
         <AnaliticUserTop />
       </div>
@@ -37,7 +39,7 @@ const TableCustomers = (props) => {
             {props.customer
               .filter((cust) => {
                 return (
-                  (cust.data < start) &
+                  (cust.data.slice(0,10) < start) &
                   (cust.agreement_1 === true)
                 );
               })
@@ -47,7 +49,7 @@ const TableCustomers = (props) => {
                   <td className="col-2 tableFontSize">{cust.phone}</td>
                   <td className="col-2 tableFontSize">{cust.email}</td>
                   <td className="col-2 tableFontSize">
-                    {cust.data}
+                    {cust.data.slice(0,10)}
                   </td>
 
                   <td className="col-3 getCenter">
@@ -80,7 +82,7 @@ const TableCustomers = (props) => {
             {props.customer
               .filter((cust) => {
                 return (
-                  (cust.data === start) &
+                  (cust.data.slice(0,10)=== start) &
                   (cust.agreement_1 === true)
                 );
               })
@@ -90,7 +92,7 @@ const TableCustomers = (props) => {
                   <td className="col-2 tableFontSize">{cust.phone}</td>
                   <td className="col-2 tableFontSize">{cust.email}</td>
                   <td className="col-2 tableFontSize">
-                    {cust.data}
+                    {cust.data.slice(0,10)}
                   </td>
                   <td className="col-3 getCenter">
                     <OverlayTrigger
@@ -105,7 +107,7 @@ const TableCustomers = (props) => {
                       <img
                         className="imgTable"
                         src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/35/null/external-user-cv-resume-flatart-icons-outline-flatarticons.png"
-                        alt="Szczebóły"
+                        alt="Szczegóły"
                         onClick={() => {
                           handleShow(false);
                         }}
@@ -123,7 +125,7 @@ const TableCustomers = (props) => {
             {props.customer
               .filter((cust) => {
                 return (
-                  (cust.data > start) &
+                  (cust.data.slice(0,10) > start) &
                   (cust.agreement_1 === true)
                 );
               })
@@ -132,9 +134,7 @@ const TableCustomers = (props) => {
                   <td className="col-3 tableFontSize">{cust.name}</td>
                   <td className="col-2 tableFontSize">{cust.phone}</td>
                   <td className="col-2 tableFontSize">{cust.email}</td>
-                  <td className="col-2 tableFontSize">
-                    {cust.data}
-                  </td>
+                  <td className="col-2 tableFontSize">{cust.data.slice(0,10)}</td>
                   <td className="col-3 getCenter">
                     <OverlayTrigger
                       key="top"

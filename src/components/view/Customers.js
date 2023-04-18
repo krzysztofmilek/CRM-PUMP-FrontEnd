@@ -1,19 +1,15 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import { Table, Button, Container } from "react-bootstrap";
+import { Table, Button, Container, Col, Form, InputGroup, Row,OverlayTrigger, Tooltip } from "react-bootstrap";
 import axios from "axios";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Row from "react-bootstrap/Row";
 import ModalDeleteCustomer from "../modals/ModalDeleteCustomer";
+import ModalEditCustomer from "../modals/ModalEditCustomer";
 //import moment from 'moment'
 //import DatePicker from "react-datepicker";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import pl from "date-fns/locale/pl";
+import NavBar from "./NavBar";
 registerLocale("pl", pl);
 
 const Customers = () => {
@@ -22,6 +18,31 @@ const Customers = () => {
   const [editCustomer, setEditCustomer] = useState({});
   const [search, setSearch] = useState("");
 
+
+
+// get full Date
+const getFD = new Date();
+
+//Day
+const getDay = ((getFD.getDate() <10)? "0"+ getFD.getDate():getFD.getDate());
+console.log("data"+getDay);
+
+
+//Month
+const gM = getFD.getMonth();
+const gMAddOne = gM+1;
+const getMonth = ((gMAddOne <10)?"0"+gMAddOne : "");
+//year
+const getYear = getFD.getFullYear();
+
+// added to day 3 - no use rozbudowac o warunek zmiany daty z 31 na 1
+//const upDay = (getDay + 3);
+//to string
+const dateSubString = (getYear +"-"+getMonth+"-"+ getDay);
+const getTodey = dateSubString.toString();
+console.log("todey",getTodey);
+
+
   const addCustomer = async () => {
     const pos = {
       name: editCustomer.name,
@@ -29,17 +50,16 @@ const Customers = () => {
       email: editCustomer.email,
       nameCompany: editCustomer.nameCompany,
       NIP: editCustomer.NIP,
-      data: editCustomer.data,
-      agreement_1: editCustomer.agreement_1,
+      data: getTodey,
+      agreement_1: true,
       zip: editCustomer.zip,
       street: editCustomer.street,
       city: editCustomer.city,
     };
-    console.log(pos);
+    console.log("pos 1",pos);
     await axios.post("http://localhost:8080/customer/add", pos);
-    console.log(pos);
-    getCustomers(); 
-    console.log(editCustomer)
+    console.log("pos", pos);
+     console.log("editCon",editCustomer)
   };
 
   const getCustomer = (e) =>
@@ -52,7 +72,7 @@ const Customers = () => {
       [e.target.street]: e.target.value,
       [e.target.zip]: e.target.value,
       [e.target.agreement_1]: true,
-     // [e.target.data]: e.target.value,
+      [e.target.data]: getTodey,
       [e.target.NIP]: e.target.value,
       [e.target.nameCompany]: e.target.value,
     }));
@@ -81,6 +101,7 @@ const Customers = () => {
 
   return (
     <Container>
+      <NavBar />
       <div className="up getLeft">
         <p className="tittle">Dodaj nowego Klienta</p>
         <hr />
@@ -319,7 +340,7 @@ const Customers = () => {
                   <td className="col-3 tableFontSize">{cust.name}</td>
                   <td className="col-2 tableFontSize">{cust.phone}</td>
                   <td className="col-2 tableFontSize">{cust.email}</td>
-                  <td className="col-2 tableFontSize">{cust.data}
+                  <td className="col-2 tableFontSize">{cust.data.substring(0,10)}
                   </td>
                   <td className="col-1 getCenter">
                     <OverlayTrigger
@@ -338,20 +359,7 @@ const Customers = () => {
                     </OverlayTrigger>
                   </td>
                   <td className="col-1 getCenter">
-                    <OverlayTrigger
-                      key="top"
-                      placement="top"
-                      overlay={
-                        <Tooltip id="tooltip-top">Edytuj Dane Klienta</Tooltip>
-                      }
-                    >
-                      <img
-                        className="imgTable"
-                        src="https://img.icons8.com/windows/32/000000/edit-user.png"
-                        alt="Edytuj"
-                     
-                      />
-                    </OverlayTrigger>
+                  <ModalEditCustomer cust={cust} getCustomers={getCustomers} />
                   </td>
                   <td className="col-1 getCenter">
                     <OverlayTrigger

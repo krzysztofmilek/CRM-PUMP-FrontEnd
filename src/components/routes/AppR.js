@@ -10,7 +10,8 @@ import Analitics from '../view/Analitics';
 import Chance from '../view/Chance';
 import Users from '../view/Users'
 import Details from '../view/Details'
-import TableCustomers from '../TableCustomers';
+import TableCustomers from '../view/TableCustomers';
+import SignUpUser from '../../SignUpUser';
 
 
 const AppR = (props) => {
@@ -23,6 +24,7 @@ const AppR = (props) => {
          <Route path="/chance" element={<Chance />} /> 
          <Route path="/users" element={<Users />} /> 
          <Route path="/details" element={<Details />} /> 
+         <Route path="/signup" element={<SignUpUser />} /> 
       </Routes>
 
 

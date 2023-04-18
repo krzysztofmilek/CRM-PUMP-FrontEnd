@@ -1,71 +1,226 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { useState } from 'react';
+import React from "react";
+import Modal from "react-bootstrap/Modal";
+import axios from "axios";
+import { useState } from "react";
+
+import {Form, Button }  from "react-bootstrap";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 
-function ModaEditUser(post) {
 
-<Modal show={show} onHide={handleClose}   >
-<Modal.Header closeButton className="modalHeaderColor">
-  <Modal.Title>Edycja uczestnika</Modal.Title>
-</Modal.Header>
-<Modal.Body className="modalBodyColor">
-  <div className="row">
-    <div className="col-lg-12">
-      <label htmlFor="name" className="form-label">Wpisz imię i nazwisko</label>
-    </div>
-  </div>
-  <div className="row">
-    <div className="col-lg-12"><input type="text" className="form-control"
-      defaultValue={editUser.name}
-      name="name"
-      id="name"
-      onChange={getUser}></input>
-    </div>
-  </div>
+function ModalEditCustomer(props) {
 
-  <div className="row">
-    <div className="col-lg-12">
-      <Form.Label>Wybierz miasto</Form.Label>
-      <Form.Control
-        as="select"
-        name="city"
-        id="city"
-        onChange={getUser}
+  const [show, setShow] = useState(false);
+  const [editCustomer, setEditCustomer] = useState({});
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const getCustomer = (e) =>
+    setEditCustomer((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+      [e.target.phone]: e.target.value,
+      [e.target.email]: e.target.value,
+      [e.target.street]: e.target.value,
+      [e.target.zip]: e.target.value,
+      [e.target.city]: e.target.value,
+      [e.target.NIP]: e.target.value,
+      [e.target.agreement_1]: e.target.value,
+      [e.target.nameCompany]: e.target.nameCompany,
+  
+    }));
+
+  const saveEditCustomer = async (use) => {
+    const user = await axios.put(
+      "http://localhost:8080/customer/edit/" + props.cust._id,
+
+      {
+        _id: use._id,
+        name: editCustomer.name,
+        phone: editCustomer.phone,
+        email: editCustomer.email,
+        street: editCustomer.street,
+        zip: editCustomer.zip,
+        city: editCustomer.city,
+        NIP: editCustomer.NIP,
+        agreement_1:editCustomer.agreement_1,
+        nameCompany: editCustomer.nameCompany,
+      }
+    );
+
+    setEditCustomer(user.data);
+    setShow(false);
+    props.getCustomers();
+  };
+
+  return (
+    <div>
+      <OverlayTrigger
+        key="top"
+        placement="top"
+        overlay={<Tooltip id="tooltip-top">Edytuj użytkownika</Tooltip>}
       >
-        <option value={editUser.city} name="city"  >{editUser.city}</option>
-        <option value="Wrocław" name="city">Wrocław</option>
-        <option value="Kraków" name="city">Kraków</option>
-        <option value="Warszawa" name="city">Warszawa</option>
-        <option value="Zielona Góra" name="Zielona Góra">Zielona Góra</option>
-      </Form.Control>
-    </div>
-  </div>
-  <div className="row">
-    <div className="col-lg-12">
-      <Form.Label >Wybierz kurs</Form.Label>
-      <Form.Control
-        as="select"
-        name="course"
-        onChange={getUser}
-      >
-        <option value={editUser.course} name="course" >{editUser.course}</option>
-        <option value="Front End Developer" name="course">Front End Developer</option>
-        <option value="Back End Developer" name="course">Back End Developer</option>
-        <option value="Full Stack Developer" name="course">Full Stack Developer</option>
-        <option value="Zaawansowany kurs Reacta" name="course">Zaawansowany kurs Reacta</option>
-      </Form.Control><br />
+        <img
+          className="imgTable"
+          src="https://img.icons8.com/windows/32/000000/edit-user.png"
+          alt="Edytuj"
+          onClick={() => {
+            handleShow(false);
+          }}
+        />
+      </OverlayTrigger>
 
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton className="modalHeaderColor">
+          <Modal.Title>Edycja użytkownika</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modalBodyColor">
+          <Form>
+            <Form.Label>
+              <b>Imię nazwisko</b>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              name="name"
+              id="name"
+              defaultValue={props.cust.name}
+              onChange={getCustomer}
+            />
+
+            <Form.Label>
+              <b>Telefon</b>
+            </Form.Label>
+            <Form.Control
+              name="phone"
+              id="phone"
+              defaultValue={props.cust.phone}
+              onChange={getCustomer}
+            />
+
+            <Form.Label>
+              <b>E-mail</b>
+            </Form.Label>
+            <Form.Control
+              name="email"
+              id="email"
+              defaultValue={props.cust.email}
+              onChange={getCustomer}
+            />
+
+       
+           
+          
+              <Form.Label>Nazwa firmy </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Nazwa firmy"
+                name="nameCompany"
+                id="nameCompany"
+                defaultValue={props.cust.nameCompany}
+              onChange={getCustomer}
+              />
+            
+         
+              <Form.Label>NIP</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="NIP"
+                name="NIP"
+                id="NIP"
+                defaultValue={props.cust.NIP}
+                onChange={getCustomer}
+              />
+         
+       
+       
+         
+              <Form.Label>Kod pocztowy</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Kod pocztowy"
+                name="zip"
+                id="zip"
+                defaultValue={props.cust.zip}
+                onChange={getCustomer}
+              />
+            
+          
+              <Form.Label>Miasto</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Miasto"
+                name="city"
+                id="city"
+                defaultValue={props.cust.city}
+                onChange={getCustomer}
+              />
+              
+              <Form.Label>Ulica, nr domu i mieszkania</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Ulica, nr domu i mieszkania"
+                name="street"
+                id="street"
+                defaultValue={props.cust.street}
+                onChange={getCustomer}
+              />
+          
+   
+           
+              <Form.Check
+                required
+                label="Wyrażam zgodę na przetwarzanie marketingowe"
+                feedback="Pole musi być zaznaczone"
+                feedbackType="invalid"
+                defaultValue={props.cust.agreement_1}
+                onChange={getCustomer}
+                         />
+         
+
+   
+
+            
+     
+        </Form>
+
+
+
+
+
+
+
+          {/* ---------------------------------------------- */}
+        </Modal.Body>
+
+
+
+
+
+
+
+
+
+
+
+
+        <Modal.Footer className="modal-footer">
+          <Button variant="outline-secondary" onClick={handleClose}>
+            Anuluj
+          </Button>
+          <Button
+            type="submit"
+            variant="outline-success"
+            onClick={(e) => {
+              saveEditCustomer(editCustomer);
+            }}
+          >
+            Zapisz zmiany
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
-  </div>
-</Modal.Body>
-<Modal.Footer className="modal-footer">
-  <Button variant="outline-secondary" onClick={handleClose}>
-    Anuluj
-  </Button>
-  <Button variant="outline-success" onClick={(e) => { updateUser(editUser) }}>
-    Zapisz zmiany
-  </Button>
-</Modal.Footer>
-</Modal>
+  );
+}
+export default ModalEditCustomer;

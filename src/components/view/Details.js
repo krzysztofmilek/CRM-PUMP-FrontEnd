@@ -1,11 +1,13 @@
 import React from 'react';
+import NavBar from './NavBar';
+
 
 const Details = () => {
 
   return (
     
       <div>
-Details
+<NavBar />
     
       </div>
   )

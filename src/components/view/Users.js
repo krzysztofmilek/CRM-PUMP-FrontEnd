@@ -9,6 +9,7 @@ import ModalDelete from "../modals/ModalDelete";
 import ModalEditUser from "../modals/ModalEditUser";
 import ModalEditUserPassword  from "../modals/ModalEditUserPassword";
 import ModalEditUserPremission from "../modals/ModalEditUserPremission"
+import NavBar from "./NavBar";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -43,7 +44,7 @@ const Users = () => {
     }));
 
   const getUsers = async () => {
-    const user = await axios.get("http://localhost:8080/");
+    const user = await axios.get("http://localhost:8080/allUsers");
     setUsers(user.data);
   };
 ;
@@ -55,6 +56,7 @@ const Users = () => {
 
   return (
     <Container>
+      <NavBar />
       <div className="tableFontSize">
 <div>
 <p className="tittle">ustal plan</p>

@@ -1,11 +1,14 @@
 import React from 'react';
+import SignUpUser from '../../SignUpUser';
+import { Navbar } from 'react-bootstrap';
 
 const Lead = () => {
 
   return (
     
       <div>
- Panel Lead
+        <Navbar />
+<SignUpUser />
     
       </div>
   )
