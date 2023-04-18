@@ -214,6 +214,25 @@ li{
     
 }
 
+.k2webdevLink{
+  position: fixed;
+  right: 70px;
+  bottom: 40px;
+  color:#808080;
+  text-decoration: none;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.k2webdevLink:hover{
+ color:black;
+
+}
+
+.signCenter
+{display:contents;}
+
 
 
 @media all and (max-width: 992px) {

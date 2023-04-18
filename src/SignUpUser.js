@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 import "./App.css";
 
 
@@ -8,7 +8,7 @@ const SignUpUser = () => {
   return (
   
   
-   
+   <Container className="signCenter">
   <div className="signUpPanel">
    {/*  <h1 className="getCenter">YORK CRM</h1> */}
     <Form >
@@ -41,7 +41,7 @@ const SignUpUser = () => {
         <span className="input-group-addon">
           <img
             className="imgTable"
-            src="https://img.icons8.com/ios/50/null/password--v1.png"
+            src="https://img.icons8.com/windows/32/null/user-lock--v1.png"
             alt="Hasło"
           />
         </span>
@@ -57,33 +57,33 @@ const SignUpUser = () => {
 
       <p className="getRightSign">
         <Button className="mt-3" variant="outline-secondary">
+        Przypomnij hasło
           <img
-            className="imgTable me-2"
-            src="https://img.icons8.com/wired/20/null/reminder.png"
-            alt="znajdz"
+            className="imgTable ms-2"
+            src="https://img.icons8.com/dotty/80/null/re-enter-pincode.png"
+            alt="Przypomnij hasło"
           />
-          Przypomnij hasło
+        
         </Button>
         <Button className="ms-4 mt-3" variant="outline-secondary">
+        Zaloguj 
           <img
-            className="imgTable me-2"
+            className="imgTable ms-2"
             src="https://img.icons8.com/ios-filled/50/null/login-rounded-right.png"
             alt="znajdz"
           />
-          Zaloguj
+          
         </Button>
       </p>
     </Form>
     
-    {/*<br />
- <p className="getRight">
-<a href="wwww.k2webdev.pl" target="_blank"><span className="black">K2</span><span className="orange">web</span><span className="black">dev</span></a>
-</p>
- */}
+    <br />
+
 
     </div>
     
-
+    <a  href="wwww.k2webdev.pl" target="_blank" className="k2webdevLink">K2<span className="orange">web</span>dev</a>
+    </Container>
   );
 };
 export default SignUpUser;
