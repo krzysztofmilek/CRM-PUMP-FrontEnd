@@ -23,7 +23,6 @@ function ModalEditUserPremission (props) {
       [e.target.phone]: e.target.value,
       [e.target.position]: e.target.value,
       [e.target.email]: e.target.value,
-      [e.target.login]: e.target.value,
       [e.target.password]: e.target.value,
       [e.target.admin]: e.target.value,
     }));
@@ -40,8 +39,7 @@ function ModalEditUserPremission (props) {
 
     setEditUser(user.data);
     setShow(false);
-    console.log(editUser)
-    props.getUsers();
+       props.getUsers();
   };
 
   return (

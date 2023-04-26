@@ -13,39 +13,41 @@ import NavBar from "./NavBar";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const [editUser, setEditUser] = useState({});
+  const [user, setUser] = useState({});
 
   const addUser = async () => {
     const post = {
-      name: editUser.name,
-      login: editUser.login,
-      password: editUser.password,
+      name: user.name,
+      password: user.password,
       active: true,
       admin: false,
-      phone: editUser.phone,
-      position: editUser.position,
-      email: editUser.email,
+      phone: user.phone,
+      position: user.position,
+      email: user.email,
     };
     await axios.post("http://localhost:8080/addUser/", post);
     getUsers();
   };
 
-  const checkPassword = () => {};
+ 
 
   const getUser = (e) =>
-    setEditUser((prevState) => ({
+    setUser((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
       [e.target.phone]: e.target.value,
       [e.target.position]: e.target.value,
       [e.target.email]: e.target.value,
-      //[e.target.password]: e.target.value,
-      [e.target.login]: e.target.value,
-    }));
+      [e.target.password]: e.target.value,
+     // [e.target.confirmPassword]: e.target.value,
+    })
+    
+    
+    );
 
   const getUsers = async () => {
-    const user = await axios.get("http://localhost:8080/allUsers");
-    setUsers(user.data);
+    const viewUsers = await axios.get("http://localhost:8080/allUsers");
+    setUsers(viewUsers.data);
   };
 ;
 
@@ -101,7 +103,7 @@ const Users = () => {
 <hr />
         <Form>
           <Row className="mb-3">
-            <Form.Group as={Col} md="3">
+            <Form.Group as={Col} md="4">
               <Form.Label>
                 <b>Imię nazwisko</b>
               </Form.Label>
@@ -111,14 +113,14 @@ const Users = () => {
                 placeholder="Imię i nazwisko"
                 name="name"
                 id="name"
-                value={editUser.name || ""}
+                value={user.name || ""}
                 onChange={getUser}
               />
               <Form.Control.Feedback type="invalid">
                 Wpisz imię nazwisko
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="3">
+            <Form.Group as={Col} md="4">
               <Form.Label>
                 <b>Stanowisko</b>
               </Form.Label>
@@ -128,14 +130,14 @@ const Users = () => {
                 placeholder="Stanowisko"
                 name="position"
                 id="position"
-                value={editUser.position || ""}
+                value={user.position || ""}
                 onChange={getUser}
               />
               <Form.Control.Feedback type="invalid">
                 Wpisz stanowisko
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="3">
+            <Form.Group as={Col} md="4">
               <Form.Label>
                 <b>Telefon</b>
               </Form.Label>
@@ -145,14 +147,14 @@ const Users = () => {
                 placeholder="Telefon"
                 name="phone"
                 id="phone"
-                value={editUser.phone || ""}
+                value={user.phone || ""}
                 onChange={getUser}
               />
               <Form.Control.Feedback type="invalid">
                 Wpisz telefon
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="3">
+            <Form.Group as={Col} md="4">
               <Form.Label>
                 <b>E-mail</b>
               </Form.Label>
@@ -162,65 +164,50 @@ const Users = () => {
                 placeholder="Wpisz E-mail"
                 name="email"
                 id="email"
-                value={editUser.email || ""}
+                value={user.email || ""}
                 onChange={getUser}
               />
               <Form.Control.Feedback type="invalid">
                 Wpisz email
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="3">
-              <Form.Label>
-                <b>Login</b>
-              </Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Login"
-                name="login"
-                id="login"
-                value={editUser.login || ""}
-                onChange={getUser}
-              />
-              <Form.Control.Feedback type="invalid">
-                Wpisz LOGIN
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group as={Col} md="3">
+            
+            <Form.Group as={Col} md="4">
               <Form.Label>
                 <b>Hasło</b>
               </Form.Label>
               <Form.Control
                 required
-                type="text"
+                type="password"
                 placeholder="Hasło"
                 name="password"
                 id="password"
-                value={editUser.password || ""}
+                value={user.password || ""}
                 onChange={getUser}
               />
               <Form.Control.Feedback type="invalid">
                 Wpisz hasło
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="3">
+            <Form.Group as={Col} md="4">
               <Form.Label>
                 <b>Powtórz hasło</b>
               </Form.Label>
               <Form.Control
                 required
-                type="text"
-                placeholder="Powtórz hasło"
-                name="reapetPassword"
-                id="reapetPassword"
-                value=" "
-                onChange={checkPassword}
+                type="password"
+                placeholder="Hasło"
+                name="confirmPassword"
+                id="confirmPassword"
+                value={user.confirmPassword || ""}
+                onChange={getUser}
               />
               <Form.Control.Feedback type="invalid">
-                Hasła nie sa takie same
+                Hasła nie sa takie same confirmPassword
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="2" className="mt-4">
+            <Form.Group as={Col} md="12" className="mt-4">
+              <p className="getRight">
               <Button type="submit" variant="success" onClick={addUser}>
                 <img
                   className="imgTable "
@@ -228,7 +215,7 @@ const Users = () => {
                   alt="DODAJ"
                 />
                 Dodaj użytkownika
-              </Button>
+              </Button></p>
             </Form.Group>
           </Row>
         </Form>

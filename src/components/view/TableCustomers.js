@@ -7,12 +7,14 @@ import Tooltip from "react-bootstrap/Tooltip";
 import NavBar from "./NavBar";
 
 const TableCustomers = (props) => {
+
+
+
   // eslint-disable-next-line
   const [cust, setCust] = useState({});
 
   const start = new Date().toISOString().substring(0,10);
-  console.log("data to string",start.toString());
-  console.log(props.customer);
+
 
   const handleShow = (cust) => {
     setCust(cust);

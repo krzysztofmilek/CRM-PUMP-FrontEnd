@@ -1,6 +1,7 @@
 import React from 'react';
-import SignUpUser from '../../SignUpUser';
+
 import { Navbar } from 'react-bootstrap';
+
 
 const Lead = () => {
 
@@ -8,7 +9,7 @@ const Lead = () => {
     
       <div>
         <Navbar />
-<SignUpUser />
+
     
       </div>
   )

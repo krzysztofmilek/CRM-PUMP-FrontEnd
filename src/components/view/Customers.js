@@ -4,13 +4,14 @@ import { Table, Button, Container, Col, Form, InputGroup, Row,OverlayTrigger, To
 import axios from "axios";
 import ModalDeleteCustomer from "../modals/ModalDeleteCustomer";
 import ModalEditCustomer from "../modals/ModalEditCustomer";
-//import moment from 'moment'
+/* //import moment from 'moment'
 //import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import pl from "date-fns/locale/pl";
+registerLocale("pl", pl); */
 import NavBar from "./NavBar";
-registerLocale("pl", pl);
+
 
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
@@ -25,7 +26,6 @@ const getFD = new Date();
 
 //Day
 const getDay = ((getFD.getDate() <10)? "0"+ getFD.getDate():getFD.getDate());
-console.log("data"+getDay);
 
 
 //Month
@@ -40,7 +40,7 @@ const getYear = getFD.getFullYear();
 //to string
 const dateSubString = (getYear +"-"+getMonth+"-"+ getDay);
 const getTodey = dateSubString.toString();
-console.log("todey",getTodey);
+
 
 
   const addCustomer = async () => {
@@ -56,9 +56,9 @@ console.log("todey",getTodey);
       street: editCustomer.street,
       city: editCustomer.city,
     };
-    console.log("pos 1",pos);
+  
     await axios.post("http://localhost:8080/customer/add", pos);
-    console.log("pos", pos);
+   
      console.log("editCon",editCustomer)
   };
 
@@ -79,7 +79,7 @@ console.log("todey",getTodey);
 
 
   const getCustomers = async () => {
-    const customer = await axios.get("http://localhost:8080/customers");
+    const customer = await axios.get("http://localhost:8080/customer/");
 
     setCustomers(customer.data);
   };
@@ -274,7 +274,7 @@ console.log("todey",getTodey);
 
             <Form.Group as={Col} md="2"></Form.Group>
 
-            <Form.Group as={Col} md="1" className="mt-5">
+            <Form.Group as={Col} md="2" className="mt-5">
               <Button type="" onClick={addCustomer}>
                 ZAPISZ
               </Button>
@@ -293,7 +293,7 @@ console.log("todey",getTodey);
             <tr>
               <th>
                 <div className="input-group">
-                  <span className="input-group-addon">
+                  <span className="input-icon-search">
                     <img
                       className="imgTable"
                       src="https://img.icons8.com/small/35/null/find-user-male.png"
@@ -330,8 +330,7 @@ console.log("todey",getTodey);
             {customers
               .filter((cust) => {
                 return search.toLowerCase() === ""
-                  ? cust
-                  : cust.name.toLowerCase().includes(search) ||
+                  ? cust : cust.name.toLowerCase().includes(search) ||
                       cust.email.toLowerCase().includes(search) ||
                       cust.NIP.toLowerCase().includes(search);
               })
