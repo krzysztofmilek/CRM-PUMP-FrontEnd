@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   border: 0px solid red;
+ 
 }
 
 .containerCard {
@@ -142,16 +143,30 @@ h4 {
 .tableFontSize {
   font-size: 0.85em;
 }
+.mainMenu{
+  display:flex;
+}
 
 .btnFull {
   font-weight: 500;
   font-size: 1.2em;
   text-transform: uppercase;
-  width: 200px;
+  width: 150px !important;
+  height: 150px !important;
+
+  align-items: center;
+  justify-content: center;
   padding: 5px;
   margin: 5px;
   border: 2px solid gray;
   border-radius: 10px;
+  background-color: white;
+  text-decoration: none;
+  color: gray;
+
+}
+.btnFull :hover{
+color:#71c2ff;
 }
 li {
   text-align: left !important;
@@ -199,6 +214,11 @@ li {
 .imgLogin {
   margin-top: 0px;
   height: 35px;
+  cursor: pointer;
+}
+.imgMenu {
+  margin-top: 0px;
+  height: 95px;
   cursor: pointer;
 }
 

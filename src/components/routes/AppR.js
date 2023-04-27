@@ -5,24 +5,31 @@ import Lead from '../view/Lead';
 import Analitics from '../view/Analitics';
 import Chance from '../view/Chance';
 import Users from '../view/Users'
-import Details from '../view/Details'
 import TableCustomers from '../view/TableCustomers';
+import PrivateRoutes from '../middlewares/PrivateRoutes';
+
 
 import Login from '../../Login';
 
 
+
 const AppR = (props) => {
+    
     return (
+  
         <Routes>
-        <Route  path="/home" element={<TableCustomers customer={props.customers} getCustomers={props.getCustomers} resData={props.state}/>} /> 
-         <Route path="/customers" element={<Customers customer={props.customers} getCustomers={props.getCustomers} />} /> 
-         <Route path="/lead" element={<Lead />} /> 
-         <Route path="/analitics" element={<Analitics />} /> 
-         <Route path="/chance" element={<Chance />} /> 
-         <Route path="/users" element={<Users />} /> 
-         <Route path="/details" element={<Details />} /> 
-         <Route path="/" element={<Login />} /> 
+        <Route  element={<PrivateRoutes />} >
+             <Route  path="/home" element={<TableCustomers customer={props.customers}     getCustomers={props.getCustomers} resData={props.state}/> } exact /> 
+             <Route path="/customers" element={<Customers customer={props.customers} getCustomers={props.getCustomers} />} /> 
+             <Route path="/lead" element={<Lead />} /> 
+             <Route path="/analitics" element={<Analitics />} /> 
+             <Route path="/chance" element={ <Chance />} /> 
+             <Route path="/users" element={<Users />} /> 
+         </Route>
+        <Route path="/login" element={<Login />} /> 
+        <Route path="/" element={<Login />} /> 
       </Routes>
+
 
 
   

@@ -16,8 +16,6 @@ const Login = (props) => {
   const [loginMessage, setLoginMessage] = useState("");
   const navigate = useNavigate();
   
- 
-
   const handleInputChange = (e) => {
     const target = e.target;
     const name = target.name;
@@ -36,11 +34,11 @@ const Login = (props) => {
         })
        .then((res) => {
           if (res.data.error) {
+            console.log(res.data.error.status);
           setLoginMessage(res.data.message);
-        } else  
-         {
+        } else  {
            localStorage.setItem("user", JSON.stringify(res.data)); 
-            const redirectToAbout = () => {
+            const redirectToHome = () => {
               navigate("/home", {
                   state: {
                       name: res.data.name,
@@ -49,7 +47,7 @@ const Login = (props) => {
                   },
               });
             }
-            redirectToAbout()
+            redirectToHome()
                      
           }
         })}

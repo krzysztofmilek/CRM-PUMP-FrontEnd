@@ -14,7 +14,9 @@ function App() {
   };
   return (
     <div className="App">
+
       <AppR getCustomers={getCustomers} customers={customers} setUser={setUser} />
+
     </div>
   );
 }
