@@ -3,14 +3,11 @@ import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import { useState } from "react";
 
-import {Form, Button }  from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
-
-
 function ModalEditCustomer(props) {
-
   const [show, setShow] = useState(false);
   const [editCustomer, setEditCustomer] = useState({});
 
@@ -29,7 +26,6 @@ function ModalEditCustomer(props) {
       [e.target.NIP]: e.target.value,
       [e.target.agreement_1]: e.target.value,
       [e.target.nameCompany]: e.target.nameCompany,
-  
     }));
 
   const saveEditCustomer = async (use) => {
@@ -45,7 +41,7 @@ function ModalEditCustomer(props) {
         zip: editCustomer.zip,
         city: editCustomer.city,
         NIP: editCustomer.NIP,
-        agreement_1:editCustomer.agreement_1,
+        agreement_1: editCustomer.agreement_1,
         nameCompany: editCustomer.nameCompany,
       }
     );
@@ -53,6 +49,7 @@ function ModalEditCustomer(props) {
     setEditCustomer(user.data);
     setShow(false);
     props.getCustomers();
+    setEditCustomer(null);
   };
 
   return (
@@ -109,101 +106,67 @@ function ModalEditCustomer(props) {
               onChange={getCustomer}
             />
 
-       
-           
-          
-              <Form.Label>Nazwa firmy </Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Nazwa firmy"
-                name="nameCompany"
-                id="nameCompany"
-                defaultValue={props.cust.nameCompany}
+            <Form.Label>Nazwa firmy </Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Nazwa firmy"
+              name="nameCompany"
+              id="nameCompany"
+              defaultValue={props.cust.nameCompany}
               onChange={getCustomer}
-              />
-            
-         
-              <Form.Label>NIP</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="NIP"
-                name="NIP"
-                id="NIP"
-                defaultValue={props.cust.NIP}
-                onChange={getCustomer}
-              />
-         
-       
-       
-         
-              <Form.Label>Kod pocztowy</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Kod pocztowy"
-                name="zip"
-                id="zip"
-                defaultValue={props.cust.zip}
-                onChange={getCustomer}
-              />
-            
-          
-              <Form.Label>Miasto</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Miasto"
-                name="city"
-                id="city"
-                defaultValue={props.cust.city}
-                onChange={getCustomer}
-              />
-              
-              <Form.Label>Ulica, nr domu i mieszkania</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Ulica, nr domu i mieszkania"
-                name="street"
-                id="street"
-                defaultValue={props.cust.street}
-                onChange={getCustomer}
-              />
-          
-   
-           
-              <Form.Check
-                required
-                label="Wyrażam zgodę na przetwarzanie marketingowe"
-                feedback="Pole musi być zaznaczone"
-                feedbackType="invalid"
-                defaultValue={props.cust.agreement_1}
-                onChange={getCustomer}
-                         />
-         
+            />
 
-   
+            <Form.Label>NIP</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="NIP"
+              name="NIP"
+              id="NIP"
+              defaultValue={props.cust.NIP}
+              onChange={getCustomer}
+            />
 
-            
-     
-        </Form>
+            <Form.Label>Kod pocztowy</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Kod pocztowy"
+              name="zip"
+              id="zip"
+              defaultValue={props.cust.zip}
+              onChange={getCustomer}
+            />
 
+            <Form.Label>Miasto</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Miasto"
+              name="city"
+              id="city"
+              defaultValue={props.cust.city}
+              onChange={getCustomer}
+            />
 
+            <Form.Label>Ulica, nr domu i mieszkania</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Ulica, nr domu i mieszkania"
+              name="street"
+              id="street"
+              defaultValue={props.cust.street}
+              onChange={getCustomer}
+            />
 
+            <Form.Check
+              required
+              label="Wyrażam zgodę na przetwarzanie marketingowe"
+              feedback="Pole musi być zaznaczone"
+              feedbackType="invalid"
+              defaultValue={props.cust.agreement_1}
+              onChange={getCustomer}
+            />
+          </Form>
 
-
-
-
-          {/* ---------------------------------------------- */}
-        </Modal.Body>
-
-
-
-
-
-
-
-
-
-
-
+           </Modal.Body>
 
         <Modal.Footer className="modal-footer">
           <Button variant="outline-secondary" onClick={handleClose}>

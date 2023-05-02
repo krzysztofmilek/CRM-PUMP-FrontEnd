@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
+
 function NavBar(props) {
   const userToken = JSON.parse(localStorage.getItem("user"));
 
@@ -105,6 +106,19 @@ function NavBar(props) {
               />
             </div>
             <div>Użytkownicy</div>{" "}
+          </Link>
+        ) : null}
+
+{userToken.access ? (
+          <Link to="/settings" className="btnFull">
+          <div>
+              <img
+                className="imgMenu"
+                src="https://img.icons8.com/pulsar-line/48/null/settings.png"
+                alt="analitics"
+              />
+            </div>
+            <div>Ustawienia</div>{" "}
           </Link>
         ) : null}
       </div>

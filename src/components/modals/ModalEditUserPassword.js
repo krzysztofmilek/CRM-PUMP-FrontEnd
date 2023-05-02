@@ -9,33 +9,33 @@ import Tooltip from "react-bootstrap/Tooltip";
 
 function ModalEditUserPassowrd(props) {
   const [show, setShow] = useState(false);
-  const [editUser, setEditUser] = useState({});
+  const [userPassword, setUserPassword] = useState({});
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const getUser = (e) =>
-    setEditUser((prevState) => ({
+  const getPassword = (e) =>
+    setUserPassword((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+    [e.target.name]: e.target.value,
       [e.target.phone]: e.target.value,
       [e.target.position]: e.target.value,
       [e.target.email]: e.target.value,
       [e.target.password]: e.target.value,
     }));
 
-  const saveEditUser = async (use) => {
-    const user = await axios.put(
-      "http://localhost:8080/edit/" + props.use._id,
+  const changeUserPassword = async (use) => {
+    const userPass = await axios.put(
+      "http://localhost:8080/changePassword/" + props.use._id,
 
       {
         _id: use._id,
-        password: editUser.password,
+        password: userPassword.password,
       }
     );
 
-    setEditUser(user.data);
+    setUserPassword(userPass.data);
     setShow(false);
-    props.getUsers();
+   props.getUsers();
   };
 
   return (
@@ -71,7 +71,7 @@ function ModalEditUserPassowrd(props) {
               name="password"
               id="password"
               defaultValue=""
-              onChange={getUser}
+              onChange={getPassword}
             />
 
             <Form.Label>
@@ -82,7 +82,7 @@ function ModalEditUserPassowrd(props) {
               name="second-Password"
               id="second-Password"
               defaultValue=""
-              onChange={getUser}
+              onChange={getPassword}
             />
           </Form>
         </Modal.Body>
@@ -94,7 +94,7 @@ function ModalEditUserPassowrd(props) {
             type="submit"
             variant="outline-success"
             onClick={(e) => {
-              saveEditUser(editUser);
+              changeUserPassword(userPassword);
             }}
           >
             Zapisz zmiany

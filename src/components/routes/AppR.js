@@ -7,6 +7,7 @@ import Chance from '../view/Chance';
 import Users from '../view/Users'
 import TableCustomers from '../view/TableCustomers';
 import PrivateRoutes from '../middlewares/PrivateRoutes';
+import Settings from '../view/Settings';
 
 
 import Login from '../../Login';
@@ -25,6 +26,7 @@ const AppR = (props) => {
              <Route path="/analitics" element={<Analitics />} /> 
              <Route path="/chance" element={ <Chance />} /> 
              <Route path="/users" element={<Users />} /> 
+             <Route path="/settings" element={<Settings/>} /> 
          </Route>
         <Route path="/login" element={<Login />} /> 
         <Route path="/" element={<Login />} /> 

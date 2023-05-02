@@ -12,7 +12,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 function ModalEditUser(props) {
 
   const [show, setShow] = useState(false);
-  const [editUser, setEditUser] = useState({});
+  const [editUser, setEditUser] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -25,6 +25,7 @@ function ModalEditUser(props) {
       [e.target.position]: e.target.value,
       [e.target.email]: e.target.value,
       [e.target.login]: e.target.value,
+   
     }));
 
   const saveEditUser = async (use) => {
@@ -37,13 +38,14 @@ function ModalEditUser(props) {
         phone: editUser.phone,
         position: editUser.position,
         email: editUser.email,
-        login: editUser.login,
+        login: editUser.email,
       }
     );
 
     setEditUser(user.data);
     setShow(false);
     props.getUsers();
+    setEditUser(null);
   };
 
   return (
@@ -112,15 +114,7 @@ function ModalEditUser(props) {
               onChange={getUser}
             />
 
-            <Form.Label>
-              <b>Login</b>
-            </Form.Label>
-            <Form.Control
-              name="login"
-              id="login"
-              defaultValue={props.use.login}
-              onChange={getUser}
-            />
+         
           </Form>
         </Modal.Body>
         <Modal.Footer className="modal-footer">
