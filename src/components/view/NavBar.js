@@ -1,8 +1,9 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+
 import { Link } from "react-router-dom";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import "../css/NavBar.css";
 
 
 function NavBar(props) {
@@ -14,7 +15,7 @@ function NavBar(props) {
         <p>
           {!userToken ? "" : userToken.name}
 
-          {!userToken.access ? "Użytkownik" : "Administrator  "}
+          {!userToken.access ? " Użytkownik" : " Administrator  "}
           <OverlayTrigger
             key="top2"
             placement="top"
@@ -43,44 +44,44 @@ function NavBar(props) {
         <Link to="/home" className="btnFull">
           {" "}
           <div>
-              <img
-                className="imgMenu"
-                src="https://img.icons8.com/cotton/64/null/home--v3.png"
-                alt="analitics"
-              />
-            </div>
-            <div>Home</div>{" "}
+            <img
+              className="imgMenu"
+              src="https://img.icons8.com/cotton/64/null/home--v3.png"
+              alt="analitics"
+            />
+          </div>
+          <div>Home</div>{" "}
         </Link>
         <Link to="/lead" className="btnFull">
-        <div>
-              <img
-                className="imgMenu"
-                src="https://img.icons8.com/cotton/64/null/receive-cash--v6.png"
-                alt="analitics"
-              />
-            </div>
-            <div>Nowy Lead</div>{" "}
+          <div>
+            <img
+              className="imgMenu"
+              src="https://img.icons8.com/cotton/64/null/receive-cash--v6.png"
+              alt="analitics"
+            />
+          </div>
+          <div>Nowy Lead</div>{" "}
         </Link>
         <Link to="/customers" className="btnFull">
-        <div>
-              <img
-                className="imgMenu"
-                src="https://img.icons8.com/cotton/64/null/conference-call.png"
-                alt="analitics"
-              />
-            </div>
-            <div>Klienci</div>{" "}
+          <div>
+            <img
+              className="imgMenu"
+              src="https://img.icons8.com/cotton/64/null/conference-call.png"
+              alt="analitics"
+            />
+          </div>
+          <div>Klienci</div>{" "}
         </Link>
+
         <Link to="/chance" className="btnFull">
-        <div>
-              <img
-                className="imgMenu"
-                src="https://img.icons8.com/external-outline-geotatah/64/null/external-chance-talent-management-outline-geotatah.png"
-                alt="analitics"
-              />
-            </div>
-            <div> Giełda</div>{" "}
-            
+          <div>
+            <img
+              className="imgMenu"
+              src="https://img.icons8.com/external-outline-geotatah/64/null/external-chance-talent-management-outline-geotatah.png"
+              alt="analitics"
+            />
+          </div>
+          <div> Giełda</div>{" "}
         </Link>
 
         {userToken.access ? (
@@ -98,7 +99,7 @@ function NavBar(props) {
 
         {userToken.access ? (
           <Link to="/users" className="btnFull">
-          <div>
+            <div>
               <img
                 className="imgMenu"
                 src="https://img.icons8.com/windows/64/null/gender-neutral-user.png"
@@ -109,9 +110,9 @@ function NavBar(props) {
           </Link>
         ) : null}
 
-{userToken.access ? (
+        {userToken.access ? (
           <Link to="/settings" className="btnFull">
-          <div>
+            <div>
               <img
                 className="imgMenu"
                 src="https://img.icons8.com/pulsar-line/48/null/settings.png"
@@ -121,6 +122,17 @@ function NavBar(props) {
             <div>Ustawienia</div>{" "}
           </Link>
         ) : null}
+
+        <Link to="/users" className="btnFull">
+          <div>
+            <img
+              className="imgMenu"
+              src="https://img.icons8.com/ios-filled/35/null/logout-rounded.png"
+              alt="analitics"
+            />
+          </div>
+          <div>Wyloguj</div>{" "}
+        </Link>
       </div>
     </div>
   );

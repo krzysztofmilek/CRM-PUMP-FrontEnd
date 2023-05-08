@@ -10,7 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import pl from "date-fns/locale/pl";
 registerLocale("pl", pl); */
-import NavBar from "./NavBar";
+import Menu from "./Menu";
 
 
 const Customers = () => {
@@ -28,16 +28,11 @@ const getFD = new Date();
 const getDay = ((getFD.getDate() <10)? "0"+ getFD.getDate():getFD.getDate());
 
 
-//Month
+
 const gM = getFD.getMonth();
 const gMAddOne = gM+1;
 const getMonth = ((gMAddOne <10)?"0"+gMAddOne : "");
-//year
 const getYear = getFD.getFullYear();
-
-// added to day 3 - no use rozbudowac o warunek zmiany daty z 31 na 1
-//const upDay = (getDay + 3);
-//to string
 const dateSubString = (getYear +"-"+getMonth+"-"+ getDay);
 const getTodey = dateSubString.toString();
 
@@ -59,7 +54,7 @@ const getTodey = dateSubString.toString();
   
     await axios.post("http://localhost:8080/customer/add", pos);
    
-     console.log("editCon",editCustomer)
+     
   };
 
   const getCustomer = (e) =>
@@ -80,7 +75,6 @@ const getTodey = dateSubString.toString();
 
   const getCustomers = async () => {
     const customer = await axios.get("http://localhost:8080/customer/");
-
     setCustomers(customer.data);
   };
 
@@ -101,7 +95,7 @@ const getTodey = dateSubString.toString();
 
   return (
     <Container>
-      <NavBar />
+  <Menu />
       <div className="up getLeft">
         <p className="tittle">Dodaj nowego Klienta</p>
         <hr />
@@ -312,9 +306,9 @@ const getTodey = dateSubString.toString();
                   </form>
                 </div>
               </th>
-              <th className="getLeft">
+              <th className="getLeft ">
                 <Button variant="outline-success" onClick={clear}>
-                  Wyczyść formularz
+                Reset
                 </Button>
               </th>
             </tr>

@@ -1,12 +1,12 @@
 import React from 'react';
-import NavBar from './NavBar';
+import Menu from './Menu';
 
 const Chance = () => {
 
   return (
     
       <div>
-        <NavBar />
+        <Menu />
 Panel Chance
      
       </div>

@@ -1,0 +1,27 @@
+
+.analiticUserBox {
+    display: flex;
+    text-align: center;
+    vertical-align: top;
+    justify-content: center;
+  }
+  .analiticUserContainer {
+
+    border: 1px solid gray;
+    margin: 15px;
+    padding: 25px;
+    border-radius: 15px;
+    min-height: 300px;
+    width: 292px;
+
+  }
+
+  @media all and (max-width: 992px) {
+    .analiticUserBox {
+      display: block;
+      justify-content: center;
+      text-align: center;
+    }
+
+
+}

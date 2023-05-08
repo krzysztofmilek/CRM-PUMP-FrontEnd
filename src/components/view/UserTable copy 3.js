@@ -4,9 +4,7 @@ import axios from "axios";
 
 const UserTable = () => {
   const [data, setData] = useState([]);
-  const [onchangeData,  setOnchangeData] = useState([]);
-
-
+  const [plain, setPlain] = useState([]);
 
   const getData = async () => {
     const viewPlain = await axios.get("http://localhost:8080/plain");
@@ -14,19 +12,24 @@ const UserTable = () => {
     console.log(viewPlain.data);
   };
 
- 
+   const Zmien = (e, index) => {
+    const { name, value } = e.target;
+    const editData = data.map((item) =>
+      item.index === index && name ? { ...item, [name]: value } : item
+    );
+    setPlain(editData);
+  }; 
 
-  const getPlain = (e) =>
-  setData((prevState) => ({
+  const getPlain = (e, index) =>
+    setData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
       [e.target.styczen]: e.target.value,
-      
-   })
-    
-    );
-    console.log(onchangeData)
+      [e.target.luty]: e.target.value,
+      [e.target.marzec]: e.target.value,
 
+      // [e.target.confirmPassword]: e.target.value,
+    }));
 
   useEffect(() => {
     getData();
@@ -45,7 +48,7 @@ const UserTable = () => {
       </thead>
       <tbody>
         {data.map((use, index) => (
-          <tr key={index}>
+          <tr key={use._id}>
             <td>
               <input
                 name="name"
@@ -60,7 +63,7 @@ const UserTable = () => {
                 name="styczen"
                 value={use.styczen}
                 type="text"
-                onChange={ getPlain}
+                onChange={(e) => getPlain(e, index)}
                 
                 placeholder="Type Name"
               />
@@ -79,7 +82,7 @@ const UserTable = () => {
                 name="marzec"
                 value={use.marzec}
                 type="text"
-                onChange={getPlain}
+                onChange={(e) => Zmien(e, index)}
                 placeholder="Type Name"
               />
             </td>
@@ -92,3 +95,41 @@ const UserTable = () => {
 
 export default UserTable;
 
+/* const onChange = (e, index) => {
+  const { name, value } = e.target;
+  const editPlains = plains.map((item) =>
+    item.index === index && name ? { ...item, [name]: value } : item
+  );
+  setPlains(editPlains);
+}; 
+
+   <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+           {plain
+           .filter((use) => {
+                return use.active === true;
+              })
+              .map((use, index) => (
+            <tr>
+              <td key={index}>
+                <input
+                  name="name"
+                  value={use.name}
+                  type="text"
+                 // onChange={(e) => onChange(e, index)}
+                  placeholder="Type Name"
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody> 
+      </table>
+    </div>
+
+*/

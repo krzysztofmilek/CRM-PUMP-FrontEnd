@@ -4,7 +4,8 @@ import { Container } from "react-bootstrap";
 import AnaliticUserTop from "./AnaliticUserTop";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import NavBar from "./NavBar";
+
+import Menu from "./Menu";
 
 const TableCustomers = (props) => {
 
@@ -27,7 +28,9 @@ const TableCustomers = (props) => {
 
   return (
     <Container>
-      <NavBar />
+  
+      <Menu />
+     
       <div className="up">
         <AnaliticUserTop />
       </div>

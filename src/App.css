@@ -14,16 +14,7 @@
   padding: 25px;
 }
 
-.analiticUserContainer {
-  display: inline-block;
-  border: 1px solid gray;
-  margin: 15px;
-  padding: 25px;
-  border-radius: 15px;
-  min-height: 300px;
-  width: 292px;
-  box-shadow: inset;
-}
+
 .imgTable {
   height: 35px;
   cursor: pointer;
@@ -48,12 +39,6 @@ hr {
   font-weight: 700;
 }
 
-.analiticUserBox {
-  display: flex;
-  text-align: left;
-  vertical-align: top;
-  justify-content: center;
-}
 
 .red {
   color: red;
@@ -222,6 +207,12 @@ li {
   cursor: pointer;
 }
 
+.imgLogout {
+  margin-top: 0px;
+  height: 95px;
+  cursor: pointer;
+}
+
 .imgLoginUser {
   margin-top: 12px;
   height: 35px;
@@ -294,11 +285,7 @@ h3 {
 }
 
 @media all and (max-width: 992px) {
-  .analiticUserBox {
-    display: block;
-    justify-content: center;
-    text-align: center;
-  }
+
   .signUpPanel {
     width: 300px !important;
   }

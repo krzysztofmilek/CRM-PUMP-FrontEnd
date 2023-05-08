@@ -9,11 +9,13 @@ import ModalDelete from "../modals/ModalDelete";
 import ModalEditUser from "../modals/ModalEditUser";
 import ModalEditUserPassword  from "../modals/ModalEditUserPassword";
 import ModalEditUserPremission from "../modals/ModalEditUserPremission"
-import NavBar from "./NavBar";
+import Menu from "./Menu";
+import UserTable from "./UserTable";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
+
 
   const addUser = async () => {
     const post = {
@@ -48,53 +50,31 @@ const Users = () => {
   const getUsers = async () => {
     const viewUsers = await axios.get("http://localhost:8080/allUsers");
     setUsers(viewUsers.data);
+
   };
-;
+
+ 
+
+   
 
   useEffect(() => {
     getUsers();
-    // eslint-disable-next-line
+    
+     // eslint-disable-next-line
   }, []);
 
   return (
-    <Container>
-      <NavBar />
+  <Container>
+  <Menu />
       <div className="tableFontSize">
 <div>
 <p className="tittle">ustal plan</p>
 <hr />
-        <Table variant="light" striped bordered hover className="">
-          
-        <tbody>
-          <tr>
-            <td>Imię nazwisko</td>
-            <td>Styczeń</td>
-            <td>Luty</td>
-            <td>Marzec</td>
-            <td>Kwiecień</td>
-            <td>Maj</td>
-            <td>Lipiec</td>
-            <td>Sierpień</td>
-            <td>Wrzesień</td>
-            <td>Pażdziernik</td>
-            <td>Listopad</td>
-            <td>Grudzień</td>
-            </tr>
-          
-            {users
-              .filter((use) => {
-                return use.active === true;
-              })
-              .map((use, index) => (
-                <tr key={index}>
-                  <td className="tableFontSize">{use.name}</td>
-           
-            
-                 
-                </tr>
-              ))}
-          </tbody>
-        </Table>
+
+<UserTable />
+
+
+
       
 </div>
 
