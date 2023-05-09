@@ -11,6 +11,7 @@ import Settings from '../view/Settings';
 
 
 import Login from '../../Login';
+import Logout from '../../Logout';
 
 
 
@@ -27,6 +28,7 @@ const AppR = (props) => {
              <Route path="/chance" element={ <Chance />} /> 
              <Route path="/users" element={<Users />} /> 
              <Route path="/settings" element={<Settings/>} /> 
+             <Route path="/logout" element={<Logout/>} /> 
          </Route>
         <Route path="/login" element={<Login />} /> 
         <Route path="/" element={<Login />} /> 

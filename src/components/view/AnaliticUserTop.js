@@ -66,12 +66,12 @@ function AnaliticUserTop() {
             {data
               .filter((cust) => {
                 return (
-                  (cust.MONTH === MONTH) 
+                  (cust.name === userName) 
                 );
               })
               .map((cust, index) => (
                 <tr key={index}>
-                  <td className="col-3 tableFontSize">{cust.MONTH}</td>
+                  <td className="col-3 tableFontSize">{cust.may}</td>
                 
                 
                 </tr>

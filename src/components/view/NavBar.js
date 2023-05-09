@@ -16,17 +16,8 @@ function NavBar(props) {
           {!userToken ? "" : userToken.name}
 
           {!userToken.access ? " Użytkownik" : " Administrator  "}
-          <OverlayTrigger
-            key="top2"
-            placement="top"
-            overlay={<Tooltip id="tooltip-top">Edytuj swoje dane</Tooltip>}
-          >
-            <img
-              className="imgSetting"
-              src="https://img.icons8.com/pulsar-line/48/null/settings.png"
-              alt="Ustawinia"
-            />
-          </OverlayTrigger>
+          <Link to="/logout">
+       
           <OverlayTrigger
             key="top"
             placement="top"
@@ -34,10 +25,12 @@ function NavBar(props) {
           >
             <img
               className="imgSetting"
-              src="https://img.icons8.com/ios-filled/50/null/logout-rounded.png"
+               src="https://img.icons8.com/ios-glyphs/20/null/logout-rounded--v1.png"
               alt="wyloguj"
             />
           </OverlayTrigger>
+        </Link>
+        
         </p>
       </div>
       <div className="mainMenu">
@@ -123,11 +116,11 @@ function NavBar(props) {
           </Link>
         ) : null}
 
-        <Link to="/users" className="btnFull">
+        <Link to="/logout" className="btnFull">
           <div>
             <img
               className="imgMenu"
-              src="https://img.icons8.com/ios-filled/35/null/logout-rounded.png"
+              src="https://img.icons8.com/ios-glyphs/60/null/logout-rounded--v1.png"
               alt="analitics"
             />
           </div>

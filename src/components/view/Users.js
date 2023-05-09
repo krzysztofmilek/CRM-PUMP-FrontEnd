@@ -1,21 +1,20 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Table, Button, Container  } from "react-bootstrap";
+import { Table, Button, Container } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import ModalDelete from "../modals/ModalDelete";
 import ModalEditUser from "../modals/ModalEditUser";
-import ModalEditUserPassword  from "../modals/ModalEditUserPassword";
-import ModalEditUserPremission from "../modals/ModalEditUserPremission"
+import ModalEditUserPassword from "../modals/ModalEditUserPassword";
+import ModalEditUserPremission from "../modals/ModalEditUserPremission";
 import Menu from "./Menu";
 import UserTable from "./UserTable";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
-
 
   const addUser = async () => {
     const post = {
@@ -28,10 +27,26 @@ const Users = () => {
       email: user.email,
     };
     await axios.post("http://localhost:8080/addUser/", post);
+
+    const plain = {
+      name: user.name,
+      id_user: user._id,
+      january: 0,
+      february: 0,
+      march: 0,
+      april: 0,
+      may: 0,
+      june: 0,
+      july: 0,
+      august: 0,
+      september: 0,
+      october: 0,
+      november: 0,
+      december: 0,
+    };
+    await axios.post("http://localhost:8080/plain//add", plain);
     getUsers();
   };
-
- 
 
   const getUser = (e) =>
     setUser((prevState) => ({
@@ -41,46 +56,33 @@ const Users = () => {
       [e.target.position]: e.target.value,
       [e.target.email]: e.target.value,
       [e.target.password]: e.target.value,
-     // [e.target.confirmPassword]: e.target.value,
-    })
-    
-    
-    );
+      // [e.target.confirmPassword]: e.target.value,
+    }));
 
   const getUsers = async () => {
     const viewUsers = await axios.get("http://localhost:8080/allUsers");
     setUsers(viewUsers.data);
-
   };
-
- 
-
-   
 
   useEffect(() => {
     getUsers();
-    
-     // eslint-disable-next-line
+
+    // eslint-disable-next-line
   }, []);
 
   return (
-  <Container>
-  <Menu />
+    <Container>
+      <Menu />
       <div className="tableFontSize">
-<div>
-<p className="tittle">ustal plan</p>
-<hr />
+        <div>
+          <p className="tittle">ustal plan</p>
+          <hr />
 
-<UserTable />
+          <UserTable />
+        </div>
 
-
-
-      
-</div>
-
-
-<p className="tittle">Dodaj nowego użytkownika</p>
-<hr />
+        <p className="tittle">Dodaj nowego użytkownika</p>
+        <hr />
         <Form>
           <Row className="mb-3">
             <Form.Group as={Col} md="4">
@@ -151,7 +153,7 @@ const Users = () => {
                 Wpisz email
               </Form.Control.Feedback>
             </Form.Group>
-            
+
             <Form.Group as={Col} md="4">
               <Form.Label>
                 <b>Hasło</b>
@@ -188,21 +190,22 @@ const Users = () => {
             </Form.Group>
             <Form.Group as={Col} md="12" className="mt-4">
               <p className="getRight">
-              <Button type="submit" variant="success" onClick={addUser}>
-                <img
-                  className="imgTable "
-                  src="https://img.icons8.com/windows/32/ffffff/add-user-male--v1.png"
-                  alt="DODAJ"
-                />
-                Dodaj użytkownika
-              </Button></p>
+                <Button type="submit" variant="success" onClick={addUser}>
+                  <img
+                    className="imgTable "
+                    src="https://img.icons8.com/windows/32/ffffff/add-user-male--v1.png"
+                    alt="DODAJ"
+                  />
+                  Dodaj użytkownika
+                </Button>
+              </p>
             </Form.Group>
           </Row>
         </Form>
       </div>
       <div className="down">
-      <p className="tittle">Lista użytkowników</p>
-<hr />
+        <p className="tittle">Lista użytkowników</p>
+        <hr />
         <Table variant="light" striped bordered hover className="tableFontSize">
           <tbody>
             {users
@@ -216,11 +219,11 @@ const Users = () => {
                   <td className="tableFontSize">{use.email}</td>
                   <td className="tableFontSize">{use.position}</td>
                   <td className="getCenter">
-                  <ModalEditUserPassword use={use} getUsers={getUsers} />
+                    <ModalEditUserPassword use={use} getUsers={getUsers} />
                   </td>
                   <td className="getCenter">
-                  <ModalEditUserPremission use={use} getUsers={getUsers} />
-                  </td> 
+                    <ModalEditUserPremission use={use} getUsers={getUsers} />
+                  </td>
                   <td className="getCenter">
                     <ModalEditUser use={use} getUsers={getUsers} />
                   </td>

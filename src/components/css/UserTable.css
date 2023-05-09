@@ -1,0 +1,25 @@
+.input{
+    width:50px;
+}
+
+.inputUserTable{
+    width: 120px;
+    border:none;
+}
+
+.inputUserTableMonth{
+    width:70px;
+    border:none;
+}
+
+.imgUserTable {
+    margin-top: 0px;
+    height: 30px;
+    cursor: pointer;
+  }
+th, td {
+    font-size: 1em;
+}
+table{
+    border: 1px solid #ccc
+}

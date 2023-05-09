@@ -1,34 +1,30 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import { Table, Button, Container, Col, Form, InputGroup, Row,OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Table, Button, Container,OverlayTrigger, Tooltip } from "react-bootstrap";
 import axios from "axios";
 import ModalDeleteCustomer from "../modals/ModalDeleteCustomer";
 import ModalEditCustomer from "../modals/ModalEditCustomer";
-/* //import moment from 'moment'
-//import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale } from "react-datepicker";
-import pl from "date-fns/locale/pl";
-registerLocale("pl", pl); */
 import Menu from "./Menu";
+import CustomerCard from "./CustomerCard";
 
 
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
-  const [validated, setValidated] = useState(false);
+
   const [editCustomer, setEditCustomer] = useState({});
   const [search, setSearch] = useState("");
 
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+ 
 
 
-// get full Date
+// funny get full Date
 const getFD = new Date();
-
-//Day
+let mon = months[getFD.getMonth()];
+let month = mon.toLowerCase()
+console.log(month)
 const getDay = ((getFD.getDate() <10)? "0"+ getFD.getDate():getFD.getDate());
-
-
-
 const gM = getFD.getMonth();
 const gMAddOne = gM+1;
 const getMonth = ((gMAddOne <10)?"0"+gMAddOne : "");
@@ -38,24 +34,7 @@ const getTodey = dateSubString.toString();
 
 
 
-  const addCustomer = async () => {
-    const pos = {
-      name: editCustomer.name,
-      phone: editCustomer.phone,
-      email: editCustomer.email,
-      nameCompany: editCustomer.nameCompany,
-      NIP: editCustomer.NIP,
-      data: getTodey,
-      agreement_1: true,
-      zip: editCustomer.zip,
-      street: editCustomer.street,
-      city: editCustomer.city,
-    };
-  
-    await axios.post("http://localhost:8080/customer/add", pos);
-   
-     
-  };
+
 
   const getCustomer = (e) =>
     setEditCustomer((prevState) => ({
@@ -96,188 +75,11 @@ const getTodey = dateSubString.toString();
   return (
     <Container>
   <Menu />
-      <div className="up getLeft">
+      <div className="">
         <p className="tittle">Dodaj nowego Klienta</p>
         <hr />
-        <Form noValidate validated={validated}>
-          <Row className="mb-3">
-            <Form.Group
-              as={Col}
-              md="4" //controlId="validationCustom01"
-            >
-              <Form.Label>
-                <b>
-                  Imię nazwisko osoby kontaktowej <span className="red">*</span>
-                </b>
-              </Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="imię i nazwisko osoby kontaktowej"
-                name="name"
-                id="name"
-                value={editCustomer.name || ""}
-                onChange={getCustomer}
-              />
-              <Form.Control.Feedback type="invalid">
-                Wpisz dane osoby kontaktowej
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group
-              as={Col}
-              md="4" //controlId="validationCustom02"
-            >
-              <Form.Label>Nazwa firmy </Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Nazwa firmy"
-                name="nameCompany"
-                id="nameCompany"
-                value={editCustomer.nameCompany || ""}
-                onChange={getCustomer}
-              />
-              <Form.Control.Feedback type="invalid">
-                Wpisz Nazwę firmy
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group
-              as={Col}
-              md="4" //controlId="validationCustom03"
-            >
-              <Form.Label>NIP</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="NIP"
-                name="NIP"
-                id="NIP"
-                value={editCustomer.NIP || ""}
-                onChange={getCustomer}
-              />
-              <Form.Control.Feedback type="invalid">
-                Wpisz NIP
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Row>
-          <Row className="mb-3">
-            <Form.Group
-              as={Col}
-              md="4" //controlId="validationCustom04"
-            >
-              <Form.Label>
-                <b>
-                  Telefon <span className="red">*</span>
-                </b>
-              </Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Telefon"
-                name="phone"
-                id="phone"
-                value={editCustomer.phone || ""}
-                onChange={getCustomer}
-              />
-              <Form.Control.Feedback type="invalid">
-                Wpisz telefon
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group
-              as={Col}
-              md="4" //controlId="validationCustom06"
-            >
-              <Form.Label>
-                <b>
-                  Adres e-mail <span className="red">*</span>
-                </b>
-              </Form.Label>
-              <InputGroup hasValidation>
-                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                <Form.Control
-                  type="text"
-                  placeholder="Adres e-mail"
-                  aria-describedby="inputGroupPrepend"
-                  name="email"
-                  id="email"
-                  value={editCustomer.email || ""}
-                  onChange={getCustomer}
-                />
-                <Form.Control.Feedback type="invalid">
-                  Wpisz poprawnie e-mail
-                </Form.Control.Feedback>
-              </InputGroup>
-            </Form.Group>
-          </Row>
-          <Row className="mb-3">
-            <Form.Group
-              as={Col}
-              md="4" //controlId="validationCustom07"
-            >
-              <Form.Label>Kod pocztowy</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Kod pocztowy"
-                name="zip"
-                id="zip"
-                value={editCustomer.zip || ""}
-                onChange={getCustomer}
-              />
-              <Form.Control.Feedback type="invalid">
-                Wpisz kod
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group
-              as={Col}
-              md="4" //controlId="validationCustom08"
-            >
-              <Form.Label>Miasto</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Miasto"
-                name="city"
-                id="city"
-                value={editCustomer.city || ""}
-                onChange={getCustomer}
-              />
-              <Form.Control.Feedback type="invalid">
-                Wpisz miasto
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group as={Col} md="4">
-              <Form.Label>Ulica, nr domu i mieszkania</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Ulica, nr domu i mieszkania"
-                name="street"
-                id="street"
-                value={editCustomer.street || ""}
-                onChange={getCustomer}
-              />
-            </Form.Group>
-          </Row>
-          <Row className="mb-1">
-            <Form.Group as={Col} md="5">
-              <Form.Check
-                required
-                label="Wyrażam zgodę na przetwarzanie marketingowe"
-                feedback="Pole musi być zaznaczone"
-                feedbackType="invalid"
-                onChange={getCustomer}
-                value={editCustomer.agreement_1 || ""}
-              />
-            </Form.Group>
-
-            <Form.Group as={Col} md="2"></Form.Group>
-
-            <Form.Group as={Col} md="2" className="mt-5">
-              <Button type="" onClick={addCustomer}>
-                ZAPISZ
-              </Button>
-            </Form.Group>
-            <Form.Group as={Col} md="2" className="mt-5">
-              <Button type="">NOWY LEAD</Button>
-            </Form.Group>
-          </Row>
-        </Form>
+        <CustomerCard />
+      
       </div>
       <div className="down">
         <p className="tittle">Wyszukaj Klienta</p>
@@ -285,18 +87,17 @@ const getTodey = dateSubString.toString();
         <Table variant="light" striped bordered hover className="fullWidth">
           <thead>
             <tr>
-              <th>
+              <td>
                 <div className="input-group">
-                  <span className="input-icon-search">
+                <form id="formSearch" className="input-search">
+                 
+                    
                     <img
                       className="imgTable"
                       src="https://img.icons8.com/small/35/null/find-user-male.png"
                       alt="znajdz"
                     />
-                  </span>
-
-                  <form id="formSearch" className="input-search">
-                    <input
+                      <input          
                       type="text"
                       className="input-search"
                       name="inputSearch"
@@ -305,12 +106,11 @@ const getTodey = dateSubString.toString();
                     />
                   </form>
                 </div>
-              </th>
-              <th className="getLeft ">
+             
                 <Button variant="outline-success" onClick={clear}>
                 Reset
                 </Button>
-              </th>
+              </td>
             </tr>
           </thead>
         </Table>

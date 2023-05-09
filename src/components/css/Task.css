@@ -1,0 +1,26 @@
+.textCustomer{
+    font-size: 1.3em;
+    font-weight: 500;
+}
+.getLeft {
+    text-align: left;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+  .title {
+    font-size: 1em;
+    text-transform: uppercase;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-weight: 700;
+  }
+  
+.showTask{
+display:block;
+  }
+  .hiddenTask{
+    display:none;
+  }

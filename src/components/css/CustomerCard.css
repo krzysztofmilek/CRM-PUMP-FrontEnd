@@ -1,0 +1,11 @@
+.textCustomer{
+    font-size: 1.3em;
+    font-weight: 500;
+}
+.getLeft {
+    text-align: left;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-size: 0.8em;
+    font-weight: 700;
+  }

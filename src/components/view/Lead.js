@@ -1,17 +1,22 @@
 import React from 'react';
+import Menu from './Menu';
+import CustomerCard from "./CustomerCard";
+import { Container } from 'react-bootstrap';
 
-import { Navbar } from 'react-bootstrap';
 
 
 const Lead = () => {
 
   return (
-    
-      <div>
-        <Navbar />
+    <Container>
 
-    
-      </div>
+        <Menu />
+        <p className="tittle">Dodaj nowego Klienta</p>
+        <hr />
+        <CustomerCard />
+
+    </Container>
+  
   )
 
 }

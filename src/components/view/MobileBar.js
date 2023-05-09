@@ -29,28 +29,20 @@ const MobileBar = (props) => {
           {!userToken ? "" : userToken.name}
 
           {!userToken.access ? " Użytkownik" : " Administrator  "}
-          <OverlayTrigger
-            key="top2"
-            placement="top"
-            overlay={<Tooltip id="tooltip-top">Edytuj swoje dane</Tooltip>}
-          >
-            <img
-              className="imgSetting"
-              src="https://img.icons8.com/pulsar-line/48/null/settings.png"
-              alt="Ustawinia"
-            />
-          </OverlayTrigger>
-          <OverlayTrigger
-            key="top"
-            placement="top"
-            overlay={<Tooltip id="tooltip-top">Wyloguj</Tooltip>}
-          >
-            <img
-              className="imgSetting"
-              src="https://img.icons8.com/ios-filled/50/null/logout-rounded.png"
-              alt="wyloguj"
-            />
-          </OverlayTrigger>
+          <Link to="/logout">
+       
+       <OverlayTrigger
+         key="top"
+         placement="top"
+         overlay={<Tooltip id="tooltip-top">Wyloguj</Tooltip>}
+       >
+         <img
+           className="imgSetting"
+           src="https://img.icons8.com/ios-filled/50/null/logout-rounded.png"
+           alt="wyloguj"
+         />
+       </OverlayTrigger>
+     </Link>
         </p>
         </div>
       <nav>
@@ -112,6 +104,11 @@ const MobileBar = (props) => {
               Ustawienia
             </Link>
           ) : null}
+          </div>
+          <div className="burger-menu-class">
+          <Link to="/logout" className="burger-menu-class-link">
+            Wyloguj
+          </Link>
           </div>
         
       </div>
