@@ -1,8 +1,39 @@
 import React from "react";
 import { Col, Row, Form } from "react-bootstrap";
+import { Table } from "react-bootstrap";
+import { useState, useEffect } from "react";
 import "../css/AnaliticUserTop.css";
+import axios from "axios";
 
 function AnaliticUserTop() {
+  const [data, setData] = useState([]);
+
+   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+  // funny get full Date
+  const getFD = new Date();
+  let mon = months[getFD.getMonth()];
+  let month = mon.toLowerCase()
+  console.log(month) 
+
+  const getName = JSON.parse(localStorage.getItem("user"));
+  const userName = getName.name
+  console.log(userName);
+
+
+
+
+  const getData = async () => {
+    const viewPlain = await axios.get("http://localhost:8080/plain/");
+    setData(viewPlain.data);
+    console.log(viewPlain.data);
+
+  };
+  useEffect(() => {
+   getData();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className="analiticUserBox">
       <Row className="">
@@ -29,7 +60,32 @@ function AnaliticUserTop() {
           <h4>PLan miesięczny</h4>
           <hr />
           <ul>
-            <li>Sprzedaż: 6</li>
+            <li>Sprzedaż: 
+            <Table variant="light" striped bordered hover className="fullWidth">
+          <tbody>
+            {data
+              .filter((cust) => {
+                return (
+                  (cust.MONTH === MONTH) 
+                );
+              })
+              .map((cust, index) => (
+                <tr key={index}>
+                  <td className="col-3 tableFontSize">{cust.MONTH}</td>
+                
+                
+                </tr>
+              ))}
+          </tbody>
+        </Table>
+
+
+
+
+
+
+
+            </li>
             <li>Skuteczność: 25%</li>
           </ul>
         </div>
