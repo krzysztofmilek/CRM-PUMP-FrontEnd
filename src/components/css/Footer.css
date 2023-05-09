@@ -1,0 +1,28 @@
+.k2webdevLink {
+    color: #808080;
+    text-decoration: none;
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 0px;
+  }
+  
+  .k2webdevLink:hover {
+    color: black;
+  }
+
+  .orange{
+    color:orange;
+  }
+  .containerFooter {
+    border: 0px solid grey;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: right;
+   padding-right: 15px;
+
+
+  }

@@ -242,12 +242,12 @@ const getTodey = dateSubString.toString();
 
             <Form.Group as={Col} md="2"></Form.Group>
 
-            <Form.Group as={Col} md="2" className="mt-5">
+            <Form.Group as={Col} md="2" className="top">
               <Button variant="outline-success" onClick={add}>
                Zapisz
               </Button>
             </Form.Group>
-            <Form.Group as={Col} md="2" className="mt-5">
+            <Form.Group as={Col} md="2" className="top">
               <Button variant="outline-success">Dalej</Button>
             </Form.Group>
           </Row>

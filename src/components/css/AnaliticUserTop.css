@@ -22,6 +22,9 @@
       justify-content: center;
       text-align: center;
     }
-
+    .analiticUserContainer {
+      width:100%;
+      margin: 0px;
+    margin-bottom: 15px;}
 
 }

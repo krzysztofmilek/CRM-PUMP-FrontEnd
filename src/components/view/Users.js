@@ -11,6 +11,9 @@ import ModalEditUserPassword from "../modals/ModalEditUserPassword";
 import ModalEditUserPremission from "../modals/ModalEditUserPremission";
 import Menu from "./Menu";
 import UserTable from "./UserTable";
+import '../css/Users.css';
+import Footer from "./Footer";
+
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -74,7 +77,7 @@ const Users = () => {
     <Container>
       <Menu />
       <div className="tableFontSize">
-        <div>
+        <div className="hiddenMobile">
           <p className="tittle">ustal plan</p>
           <hr />
 
@@ -190,12 +193,8 @@ const Users = () => {
             </Form.Group>
             <Form.Group as={Col} md="12" className="mt-4">
               <p className="getRight">
-                <Button type="submit" variant="success" onClick={addUser}>
-                  <img
-                    className="imgTable "
-                    src="https://img.icons8.com/windows/32/ffffff/add-user-male--v1.png"
-                    alt="DODAJ"
-                  />
+                <Button type="submit" variant="outline-success" onClick={addUser}>
+                  
                   Dodaj użytkownika
                 </Button>
               </p>
@@ -235,6 +234,7 @@ const Users = () => {
           </tbody>
         </Table>
       </div>
+      <Footer />
     </Container>
   );
 };

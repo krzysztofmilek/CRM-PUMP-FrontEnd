@@ -6,6 +6,8 @@ import AnaliticUserTop from "./AnaliticUserTop";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Menu from "./Menu";
+import '../css/TableCustomers.css';
+import Footer from "./Footer";
 
 
 
@@ -13,7 +15,7 @@ const TableCustomers = (props) => {
 
   const [cust, setCust] = useState({});
   const [show, setShow] =useState("hidden");
-  const [task, setTask] =useState({});
+
 
 
     const getCustomer = (cust) =>{
@@ -194,17 +196,17 @@ const TableCustomers = (props) => {
         
           <Form.Group as={Col} md="6"></Form.Group>
 
-            <Form.Group as={Col} md="2" className="mt-5 mb-5">
+            <Form.Group as={Col} md="2" className="taskButtons">
               <Button variant="outline-success" >
                Zapisz
               </Button>
             </Form.Group>
-            <Form.Group as={Col} md="2" className="mt-5">
+            <Form.Group as={Col} md="2" className="taskButtons">
               <Button variant="outline-success">Dalej</Button>
             </Form.Group>
             
             <Form.Group as={Col} md="1"></Form.Group>
-            <Form.Group as={Col} md="1" className="mt-5">
+            <Form.Group as={Col} md="1" className="taskButtonsRightMobile">
             <OverlayTrigger
                       key="top"
                       placement="top"
@@ -356,6 +358,7 @@ const TableCustomers = (props) => {
           </tbody>
         </Table>
       </div>
+      <Footer />
     </Container>
   );
 };

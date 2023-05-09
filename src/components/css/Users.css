@@ -1,0 +1,12 @@
+.hiddenMobile{
+    text-align: left;
+}
+
+
+@media all and (max-width:992px) {
+    .hiddenMobile {
+      display:none;
+  
+   
+    }
+}

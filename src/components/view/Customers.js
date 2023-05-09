@@ -6,13 +6,16 @@ import ModalDeleteCustomer from "../modals/ModalDeleteCustomer";
 import ModalEditCustomer from "../modals/ModalEditCustomer";
 import Menu from "./Menu";
 import CustomerCard from "./CustomerCard";
+import "../css/Customers.css"
+import Footer from "./Footer";
+
 
 
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
 
   const [editCustomer, setEditCustomer] = useState({});
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(" ");
 
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -57,21 +60,24 @@ const getTodey = dateSubString.toString();
     setCustomers(customer.data);
   };
 
+  
+
+
+  const clear = (() => {
+    setSearch('');
+    document.getElementById("formSearch").reset();
+  })
+const findCustomer =((e)=>{
+  let getFindCustomer = e.target.value;
+  let lowerGetFindCustomer = getFindCustomer.toLowerCase();
+  setSearch(lowerGetFindCustomer)
+})
+
+  
   useEffect(() => {
     getCustomers();
     // eslint-disable-next-line
   }, []);
-  const findCustomer = (e) => {
-    let getFindCustomer = e.target.value;
-    let lowerGetFindCustomer = getFindCustomer.toLowerCase();
-    setSearch(lowerGetFindCustomer);
-  };
-
-  const clear = () => {
-    setSearch("");
-    document.getElementById("formSearch").reset();
-  };
-
   return (
     <Container>
   <Menu />
@@ -84,33 +90,39 @@ const getTodey = dateSubString.toString();
       <div className="down">
         <p className="tittle">Wyszukaj Klienta</p>
         <hr />
-        <Table variant="light" striped bordered hover className="fullWidth">
+        <Table variant="light" striped bordered hover >
           <thead>
             <tr>
               <td>
-                <div className="input-group">
-                <form id="formSearch" className="input-search">
-                 
-                    
-                    <img
-                      className="imgTable"
+                <div className="inputGroup">
+                <form id="formSearch" className="formSearch" >
+                         <span className="imgSearchBackground">                 
+                     <img
+                      className="imgSearch"
                       src="https://img.icons8.com/small/35/null/find-user-male.png"
                       alt="znajdz"
-                    />
+                    /> 
+                  </span> 
                       <input          
                       type="text"
-                      className="input-search"
+                      
+                      className="input_Search"
                       name="inputSearch"
                       id="inputSearch"
                       onChange={findCustomer}
                     />
-                  </form>
-                </div>
-             
+                    
+              <div className="getCenterReset">
+               
                 <Button variant="outline-success" onClick={clear}>
                 Reset
                 </Button>
+                </div>
+                </form>
+                
+                </div>
               </td>
+              
             </tr>
           </thead>
         </Table>
@@ -118,16 +130,13 @@ const getTodey = dateSubString.toString();
         <p className="tittle">Lista Klientów</p>
         <hr />
 
-        {/* --------------------------------------------------------- tabela */}
-        <Table variant="light" striped bordered hover className="fullWidth">
+          <Table variant="light" striped bordered hover className="fullWidth">
           <tbody>
-            {customers
-              .filter((cust) => {
-                return search.toLowerCase() === ""
-                  ? cust : cust.name.toLowerCase().includes(search) ||
-                      cust.email.toLowerCase().includes(search) ||
-                      cust.NIP.toLowerCase().includes(search);
-              })
+            {customers.filter((cust) => {
+                return search.toLowerCase() === '' ? cust : 
+                      cust.name.toLowerCase().includes(search) ||
+                      cust.email.toLowerCase().includes(search)
+                                  })
               .map((cust, index) => (
                 <tr key={index}>
                   <td className="col-3 tableFontSize">{cust.name}</td>
@@ -172,7 +181,7 @@ const getTodey = dateSubString.toString();
                       />
                     </OverlayTrigger>
                   </td>
-                  <td>
+                  <td className="col-1 getCenter">
                  
 <ModalDeleteCustomer post={cust} getUsers={getCustomers} />
                   </td>
@@ -181,6 +190,7 @@ const getTodey = dateSubString.toString();
           </tbody>
         </Table>
       </div>
+      <Footer />
     </Container>
   );
 };

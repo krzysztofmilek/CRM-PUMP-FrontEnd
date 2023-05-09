@@ -1,0 +1,27 @@
+.taskButtons{
+    padding-top:20px;
+    padding-bottom:20px
+}
+.taskButtonsRightMobile{
+    padding-top:20px;
+    padding-bottom:20px
+}
+
+
+
+@media all and (max-width:992px) {
+  .taskButtons{
+    padding-top:5px;
+    padding-bottom:5px;
+    text-align:center;
+
+  }
+
+  .taskButtonsRightMobile{
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-right: 20px;
+    text-align:right;
+  }
+   
+    }
