@@ -1,0 +1,75 @@
+
+.inputLogin {
+    width: 80% !important;
+    border: 0px solid #ccc !important;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+    background-color: #e8f0fe !important;
+    height: 60px;
+    margin-top: 25px;
+  }
+  
+  .inputLogin:focus {
+    outline: none;
+  }
+  
+  .buttonLogin {
+    width: 100% !important;
+    border-radius: 50px;
+    margin-bottom: 50px;
+    color: #999999;
+    border-color: #e8f0fe;
+    background-color: #e8f0fe;
+  }
+  .imgLogin {
+    margin-top: 0px;
+    height: 35px;
+    cursor: pointer;
+  }
+  .imgMenu {
+    margin-top: 0px;
+    height: 95px;
+    cursor: pointer;
+  }
+  
+  .imgLogout {
+    margin-top: 0px;
+    height: 95px;
+    cursor: pointer;
+  }
+  
+  .imgLoginUser {
+    margin-top: 12px;
+    height: 35px;
+    cursor: pointer;
+  }
+  .k2webdevLink {
+    color: #808080;
+    text-decoration: none;
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 0px;
+  }
+  
+  .k2webdevLink:hover {
+    color: black;
+  }
+
+
+  @media all and (max-width: 992px) {
+
+
+    .inputLogin {
+      width:190px !important;
+      height: 45px;
+    }
+    
+      
+      .imgLoginUser {
+        margin-top: 6px;
+        height: 35px;
+        cursor: pointer;
+      }
+  
+}

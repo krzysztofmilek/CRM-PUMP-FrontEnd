@@ -36,7 +36,7 @@ function AnaliticUserTop() {
 
   return (
     <div className="analiticUserBox">
-      <Row className="">
+      <Row className="getCenter">
       <Col xxl={3} xl={4} sm={12} md={6} lg={4} className="getCenter">
         <div className="analiticUserContainer">
           <h4>Lejek sprzedaży</h4>
@@ -71,11 +71,12 @@ function AnaliticUserTop() {
               })
               .map((cust, index) => (
                 <tr key={index}>
-                  <td className="col-3 tableFontSize">{cust.may}</td>
+                  <td>Sprzedaż : {cust[month] }</td>
                 
                 
                 </tr>
-              ))}
+              )
+              )}
           </tbody>
         </Table>
 

@@ -161,16 +161,18 @@ function Task(props) {
           <Row className="mb-1">
         
 
-            <Form.Group as={Col} md="2"></Form.Group>
-
-            <Form.Group as={Col} md="2" className="mt-5 mb-5">
+<div>
+            <Form.Group as={Col} md="3" className="mt-5 mb-5">
               <Button variant="outline-success" >
                Zapisz
               </Button>
             </Form.Group>
-            <Form.Group as={Col} md="2" className="mt-5">
+            </div>
+            <div>
+            <Form.Group as={Col} md="1" className="mt-5">
               <Button variant="outline-success">Dalej</Button>
             </Form.Group>
+            </div>
           </Row>
         </Form>
 

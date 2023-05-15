@@ -12,6 +12,11 @@
 
   .top{
     padding-top:50px;
+ 
+ 
+  }
+  .btn{
+    width:50px;
   }
 
   @media all and (max-width:992px) {

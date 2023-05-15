@@ -52,9 +52,9 @@ hr {
 .container {
   border: 1px solid grey;
   border-radius: 10px;
-  margin: 10px;
-  padding-top: 15px;
-  margin-bottom: 15px;
+  margin: 5px;
+  padding: 15px;
+ 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   
 }
@@ -73,11 +73,7 @@ hr {
   font-weight: 500;
   text-align: end;
 }
-.up {
-  padding-top: 10px;
-  border: 0px solid red;
-  text-align: center;
-}
+
 
 .down {
   padding-bottom: 0px;
@@ -135,34 +131,6 @@ h4 {
 .tableFontSize {
   font-size: 0.85em;
 }
-.mainMenu{
-  display:flex;
-}
-
-.btnFull {
-  font-weight: 500;
-  font-size: 1.2em;
-  text-transform: uppercase;
-  width: 150px !important;
-  height: 150px !important;
-
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  margin: 5px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  background-color: white;
-  text-decoration: none;
-  color: gray;
-
-}
-.btnFull :hover{
-color:#71c2ff;
-}
-li {
-  text-align: left !important;
-}
 
 .input-group {
   display: flex;
@@ -181,50 +149,9 @@ li {
   border-top-left-radius: 50px;
   margin-top: 25px;
 }
-.inputLogin {
-  width: 80% !important;
-  border: 0px solid #ccc !important;
-  border-bottom-right-radius: 50px;
-  border-top-right-radius: 50px;
-  background-color: #e8f0fe !important;
-  height: 60px;
-  margin-top: 25px;
-}
 
-.inputLogin:focus {
-  outline: none;
-}
 
-.buttonLogin {
-  width: 100% !important;
-  border-radius: 50px;
-  margin-bottom: 50px;
-  color: #999999;
-  border-color: #e8f0fe;
-  background-color: #e8f0fe;
-}
-.imgLogin {
-  margin-top: 0px;
-  height: 35px;
-  cursor: pointer;
-}
-.imgMenu {
-  margin-top: 0px;
-  height: 95px;
-  cursor: pointer;
-}
 
-.imgLogout {
-  margin-top: 0px;
-  height: 95px;
-  cursor: pointer;
-}
-
-.imgLoginUser {
-  margin-top: 12px;
-  height: 35px;
-  cursor: pointer;
-}
 
 .input-icon-search {
   background: #e8f0fe;
@@ -278,18 +205,6 @@ h3 {
   color: #999999;
 }
 
-.k2webdevLink {
-  color: #808080;
-  text-decoration: none;
-  font-size: 1em;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-top: 0px;
-}
-
-.k2webdevLink:hover {
-  color: black;
-}
 
 .signCenter {
   display: contents;

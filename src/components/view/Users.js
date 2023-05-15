@@ -11,13 +11,16 @@ import ModalEditUserPassword from "../modals/ModalEditUserPassword";
 import ModalEditUserPremission from "../modals/ModalEditUserPremission";
 import Menu from "./Menu";
 import UserTable from "./UserTable";
-import '../css/Users.css';
+import "../css/Users.css";
 import Footer from "./Footer";
+import AddLeadFromExcel from "./AddLeadFromExcel";
 
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
+
+
 
   const addUser = async () => {
     const post = {
@@ -29,6 +32,7 @@ const Users = () => {
       position: user.position,
       email: user.email,
     };
+
     await axios.post("http://localhost:8080/addUser/", post);
 
     const plain = {
@@ -47,8 +51,12 @@ const Users = () => {
       november: 0,
       december: 0,
     };
+
     await axios.post("http://localhost:8080/plain//add", plain);
+
     getUsers();
+
+   
   };
 
   const getUser = (e) =>
@@ -81,7 +89,7 @@ const Users = () => {
           <p className="tittle">ustal plan</p>
           <hr />
 
-          <UserTable />
+          <UserTable getUsers={getUsers} />
         </div>
 
         <p className="tittle">Dodaj nowego użytkownika</p>
@@ -193,14 +201,20 @@ const Users = () => {
             </Form.Group>
             <Form.Group as={Col} md="12" className="mt-4">
               <p className="getRight">
-                <Button type="submit" variant="outline-success" onClick={addUser}>
-                  
+                <Button
+                  type="submit"
+                  variant="outline-success"
+                  onClick={addUser}
+                >
                   Dodaj użytkownika
                 </Button>
               </p>
             </Form.Group>
           </Row>
         </Form>
+      </div>
+      <div>
+        <AddLeadFromExcel />
       </div>
       <div className="down">
         <p className="tittle">Lista użytkowników</p>

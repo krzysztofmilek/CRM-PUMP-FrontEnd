@@ -8,6 +8,7 @@ import Users from '../view/Users'
 import TableCustomers from '../view/TableCustomers';
 import PrivateRoutes from '../middlewares/PrivateRoutes';
 import Settings from '../view/Settings';
+import Action from '../view/Action';
 
 
 import Login from '../../Login';
@@ -24,6 +25,7 @@ const AppR = (props) => {
              <Route  path="/home" element={<TableCustomers customer={props.customers}     getCustomers={props.getCustomers} resData={props.state}/> } exact /> 
              <Route path="/customers" element={<Customers customer={props.customers} getCustomers={props.getCustomers} />} /> 
              <Route path="/lead" element={<Lead />} /> 
+             <Route path="/action" element={<Action />} /> 
              <Route path="/analitics" element={<Analitics />} /> 
              <Route path="/chance" element={ <Chance />} /> 
              <Route path="/users" element={<Users />} /> 

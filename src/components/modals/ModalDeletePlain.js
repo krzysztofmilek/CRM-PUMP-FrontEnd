@@ -6,23 +6,23 @@ import { useState } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
-
-function ModalDelete(post) {
+function ModalDeletePlain(props) {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);   
+  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const userDelete = async () => {
-    await axios.delete("http://localhost:8080/delete/" + post.post._id);
+
+  const customerDelete = async () => {
+    await axios.delete("http://localhost:8080/plain/delete/" + props.post._id);
     setShow(false);
-     post.getUsers();
+    props.getData();
   };
   return (
     <div>
       <OverlayTrigger
         key="top"
         placement="top"
-        overlay={<Tooltip id="tooltip-top">Usuń użytkownika</Tooltip>}
+        overlay={<Tooltip id="tooltip-top">Usuń Klienta</Tooltip>}
       >
         <img
           className="imgTable"
@@ -33,20 +33,19 @@ function ModalDelete(post) {
           }}
         />
       </OverlayTrigger>
-   
-        
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Usuwanie użytkownika {post.post.name}</Modal.Title>
+          <Modal.Title>Usuwanie planu użytkownika {props.post.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Czy napewno chcesz usunąć tego użytkownika {post.post.name}
+          Czy napewno chcesz usunąć  plan {props.post.name}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="outline-success" onClick={handleClose}>
             Anuluj
           </Button>
-          <Button variant="outline-danger" onClick={() => userDelete()}>
+          <Button variant="outline-danger" onClick={() => customerDelete()}>
             Usuń
           </Button>
         </Modal.Footer>
@@ -55,4 +54,4 @@ function ModalDelete(post) {
   );
 }
 
-export default ModalDelete;
+export default ModalDeletePlain;

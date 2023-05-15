@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Button, Container, Form, Alert } from "react-bootstrap";
-import "./App.css";
+import "./components/css/Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -59,7 +59,12 @@ const Login = (props) => {
     <Container className="signCenter" method="POST">
       <div className="signUpPanel">
         <Form onSubmit={handleSubmit}>
-          {loginMessage &&  <Alert key='danger' variant='danger'>   {loginMessage}  </Alert>}
+          {loginMessage &&  
+          <Alert key='danger' variant='danger'>   {loginMessage}  </Alert>
+          
+          
+          
+          }
 
           <div className="input-group">
             <span className="input-group-addon">
