@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Form } from "react-bootstrap";
+import  '../css/AddLeadFromExcel.css';
 
 const AddLeadFromExcel = () => {
   const handleSubmit = (e) => {
@@ -13,17 +15,26 @@ const AddLeadFromExcel = () => {
       },
     };
     const data = new FormData();
-    data.append("kolaborant", file);
+     data.append("kolaborant", file);
     axios.post(url, data, config).then((response) => {
-      console.log(response);
+      console.log(file);
+     
     });
   };
 
   return (
+<div>
+
+    <p className="tittle">Załaduj plik - giełda</p>
+    <hr />
     <form onSubmit={handleSubmit}>
-      <input id="file-field" type="file" name="kolaborant" />
-      <input type="submit" value="submit" />
+         
+      <Form.Control id="file-field" type="file" name="kolaborant" accept=".xlsx, .xls" />
+      <p className="getRight top10" >
+      <input type="submit" value="Wyslij Dane"  className="btn btn-outline-success" />
+      </p>
     </form>
+    </div>
   );
 };
 
