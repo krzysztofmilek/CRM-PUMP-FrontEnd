@@ -9,8 +9,8 @@ import { Toast, ToastContainer } from "react-bootstrap";
 const CustomerCard = (props) => {
   const [addCustomer, setAddCustomer] = useState({});
   const [newCustomer, setNewCustomer] = useState({});
-  const [show, setShow] = useState(true); //robi dwie rzeczy
-  const [showToast, setShowToast] = useState(false); //robi dwie rzeczy
+  const [show, setShow] = useState(true); 
+  const [showToast, setShowToast] = useState(false); 
 
   // get full Date
   const getFD = new Date();
@@ -43,9 +43,11 @@ const CustomerCard = (props) => {
 
    const newCustomerRes = await axios.post("http://localhost:8080/customer/add", pos);
 
-    setNewCustomer(newCustomerRes.data);
+    setNewCustomer(newCustomerRes);
+   // console.log(pos)
     setShowToast(true)
     setShow(false)
+ 
    
   }
 
@@ -77,7 +79,7 @@ const CustomerCard = (props) => {
                 show={showToast}
                 delay={2000}
                 autohide
-                className="success"
+                bg="success"
              
               >
                 <Toast.Header>

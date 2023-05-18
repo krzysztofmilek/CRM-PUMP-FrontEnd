@@ -14,11 +14,11 @@ function AnaliticUserTop() {
   const getFD = new Date();
   let mon = months[getFD.getMonth()];
   let month = mon.toLowerCase()
-  console.log(month) 
+  //console.log(month) 
 
   const getName = JSON.parse(localStorage.getItem("user"));
   const userName = getName.name
-  console.log(userName);
+ // console.log(userName);
 
 
 
@@ -26,7 +26,7 @@ function AnaliticUserTop() {
   const getData = async () => {
     const viewPlain = await axios.get("http://localhost:8080/plain/");
     setData(viewPlain.data);
-    console.log(viewPlain.data);
+   // console.log(viewPlain.data);
 
   };
   useEffect(() => {

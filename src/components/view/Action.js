@@ -13,7 +13,7 @@ const Action = (props) => {
   const [customer, setCustomer] = useState({});
 
   let location = useLocation();
-  console.log("Jebać pis:", location.state.customer);
+ // console.log("Jebać pis:", location.state.customer);
 
   const handleSubmit = (e) => {
     // console.log("Form Submitted");
@@ -27,13 +27,11 @@ const Action = (props) => {
     const data = new FormData();
     data.append("customerFiles", file);
     axios.post(url, data, config).then((response) => {
-      console.log(response);
+     // console.log(response);
     });
   };
 
-  const saveTask = () => {
-    handleSubmit();
-  };
+
 
   return (
     <Container>
@@ -43,6 +41,7 @@ const Action = (props) => {
           show={show}
           delay={5000}
           autohide
+          bg="success"
           className="success"
         >
           <Toast.Header>
@@ -53,13 +52,13 @@ const Action = (props) => {
             />
             <strong className="me-auto">Bootstrap</strong>
           </Toast.Header>
-          <Toast.Body>Dodano zadanie</Toast.Body>
+          <Toast.Body className={'text-white'}>Dodano zadanie</Toast.Body>
         </Toast>
       </ToastContainer>
 
       <Menu />
 
-      <Form className="formAction">
+      <div className="formAction">
         <div className="inputFlex">
           <div className="inputBlock">
             <p className="textAction">Kierunek kontaktu :</p>
@@ -129,9 +128,10 @@ const Action = (props) => {
           <div className="inputBlock">
             {" "}
             <p className="textAction">Dodaj załącznik</p>
-            <form onSubmit={handleSubmit}>
+            <div>
               <input id="file-field" type="file" name="customerFiles" />
-            </form>
+              </div>
+           
           </div>
         </div>
 
@@ -144,7 +144,7 @@ const Action = (props) => {
         >
           Zapisz
         </Button>
-      </Form>
+      </div>
 
       <Footer />
     </Container>
