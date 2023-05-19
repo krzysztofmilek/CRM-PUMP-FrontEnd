@@ -14,33 +14,22 @@ const Action = (props) => {
   const [token, setToken] = useState(props.state.token);
   const [dataPicker, setDataPicker] = useState();
   const [tomorrow, setTomorrow] = useState(props.state.getDate);
-  const [selectData, setSelectData] = useState({})
+  const [selectData, setSelectData] = useState({});
 
   const getDatePicker = (e) => {
-   
-      let dat = e.target.value;
-      setDataPicker(dat);
-
-    
+    let dat = e.target.value;
+    setDataPicker(dat);
   };
 
   const getValue = (e) => {
     setSelectData({
       ...selectData,
       [e.target.name]: e.target.value,
-   
-   
-    }
-
-    );
-
-
-  } 
- 
-
+    });
+  };
 
   const handleSubmit = (e) => {
-    // console.log("Form Submitted");
+  
     const file = document.getElementById("file-field").files[0];
     const url = "http://localhost:8080/uploadCustomerFiles";
     const config = {
@@ -50,14 +39,40 @@ const Action = (props) => {
     };
     const data = new FormData();
     data.append("customerFiles", file);
-    axios.post(url, data, config).then((response) => {
+    axios.post(url, data, config)
+
+//dodoac status open
+
+
+    const pos = {
+      
+      contactData:tomorrow,
+      nextContactData:dataPicker,
+      information: selectData.information,
+      conatactWay:selectData.conatactWay,
+      direction:selectData.direction,
+      fileName: file.name,
+      status:'open',
+      user: token.id_user,
+      customer:customer._id,
+     
+    }
+
+    const newActionRes =  axios.post(
+      "http://localhost:8080/action/add",
+      pos
+    );
+    console.log(newActionRes)
+
+
+
       console.log("dodano, nazwa pliku,", file.name);
       console.log("data selected: ", dataPicker);
       console.log("data Jutro: ", tomorrow);
-      console.log("Użytkownik", token)
-      console.log("Klient", customer);;
-      console.log("sposób, kierunek, informacje : ", selectData)
-    });
+      console.log("Użytkownik", token);
+      console.log("Klient", customer);
+      console.log("sposób, kierunek, informacje : ", selectData);
+    
   };
 
   return (
@@ -95,7 +110,7 @@ const Action = (props) => {
               name="direction"
               as="select"
               id="directionAdd"
-             onChange={getValue}
+              onChange={getValue}
               required
             >
               <option>----- Kierunek kontaktu-----</option>
