@@ -1,30 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import axios from "axios";
 import "../css/CustomerCard.css";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Toast, ToastContainer } from "react-bootstrap";
 
 const CustomerCard = (props) => {
   const [addCustomer, setAddCustomer] = useState({});
   const [newCustomer, setNewCustomer] = useState({});
-  const [show, setShow] = useState(true); 
-  const [showToast, setShowToast] = useState(false); 
+  const [customer, setCustomer] = useState("");
+  const [show, setShow] = useState(true);
+  const [showToast, setShowToast] = useState(false);
+  const [token, setToken] = useState({});
 
   // get full Date
   const getFD = new Date();
   //Day
   const getDay = getFD.getDate() < 10 ? "0" + getFD.getDate() : getFD.getDate();
+  const getNextDay = getDay+1;
   const gM = getFD.getMonth();
   const gMAddOne = gM + 1;
   const getMonth = gMAddOne < 10 ? "0" + gMAddOne : "";
   const getYear = getFD.getFullYear();
-  const dateSubString = getYear + "-" + getMonth + "-" + getDay;
-  const getTodey = dateSubString.toString();
+  const dateSubString = getYear + "-" + getMonth + "-" + getNextDay;
+  const getDate = dateSubString.toString();
 
-  const getIduser = JSON.parse(localStorage.getItem("user"));
-  const userId = getIduser.id_user;
+  const getIdUser = JSON.parse(localStorage.getItem("user"));
+
+  const userId = getIdUser.id_user;
 
   const add = async () => {
     const pos = {
@@ -33,7 +37,7 @@ const CustomerCard = (props) => {
       email: addCustomer.email,
       nameCompany: addCustomer.nameCompany,
       NIP: addCustomer.NIP,
-      data: getTodey,
+      data: getDate,
       agreement_1: true,
       zip: addCustomer.zip,
       street: addCustomer.street,
@@ -41,15 +45,22 @@ const CustomerCard = (props) => {
       user: userId,
     };
 
-   const newCustomerRes = await axios.post("http://localhost:8080/customer/add", pos);
+    const newCustomerRes = await axios.post(
+      "http://localhost:8080/customer/add",
+      pos
+    );
 
-    setNewCustomer(newCustomerRes);
-   // console.log(pos)
-    setShowToast(true)
-    setShow(false)
- 
-   
-  }
+    setNewCustomer(newCustomerRes.data);
+    setCustomer(newCustomerRes.data);
+    console.log("newCustomer:", newCustomer);
+    console.log("customer:", customer);
+    console.log("customerRes:", newCustomerRes.data);
+    console.log("token", token);
+    console.log("data Jutro : ", getDate)
+
+    setShowToast(true);
+    setShow(false);
+  };
 
   const getCustomer = (e) =>
     setAddCustomer((prevState) => ({
@@ -61,41 +72,38 @@ const CustomerCard = (props) => {
       [e.target.street]: e.target.value,
       [e.target.zip]: e.target.value,
       [e.target.agreement_1]: true,
-      [e.target.data]: getTodey,
+      [e.target.data]: getDate,
       [e.target.NIP]: e.target.value,
       [e.target.nameCompany]: e.target.value,
     }));
 
+  useEffect(() => {
+    setToken(getIdUser);
+
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className="getLeft">
-
-<ToastContainer
-              className="p-3"
-              position="top-end"
-              style={{ zIndex: 1 }}
-            >
-              <Toast
-                onClose={() => setShowToast(false)}
-                show={showToast}
-                delay={2000}
-                autohide
-                bg="success"
-             
-              >
-                <Toast.Header>
-                  <img
-                    src="holder.js/20x20?text=%20"
-                    className="rounded me-2 "
-                    alt=""
-                  />
-                  <strong className="me-auto">Dodano Klienta</strong>
-                </Toast.Header>
-                <Toast.Body  >Aktywny przycisk DALEJ</Toast.Body>
-              </Toast>
-            </ToastContainer>
-        
-
-
+      <ToastContainer className="p-3" position="top-end" style={{ zIndex: 1 }}>
+        <Toast
+          onClose={() => setShowToast(false)}
+          show={showToast}
+          delay={2000}
+          autohide
+          bg="success"
+        >
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2 "
+              alt=""
+            />
+            <strong className="me-auto">Dodano Klienta</strong>
+          </Toast.Header>
+          <Toast.Body>Aktywny przycisk DALEJ</Toast.Body>
+        </Toast>
+      </ToastContainer>
 
       <Form>
         <Row className="mb-3">
@@ -273,21 +281,17 @@ const CustomerCard = (props) => {
             </Button>
           </Form.Group>
           <Form.Group as={Col} md="1" className="top">
-
-            {/* <Link 
+            <Button
+              variant="outline-success"
+              as={Link}
+              disabled={show}
               to="/action"
-                state={{customer: newCustomer}}
-                style={{ pointerEvents: show? 'none' : 'auto' }}
-                
-                > */}
-                  <Button variant="outline-success" as={Link} disabled={show} 
-                   to="/action"
-                   state={{customer: newCustomer}}
-                   style={{ pointerEvents: show? 'none' : 'auto' }}
-                  >Dalej</Button>
-         
-        {/*     </Link>  */}    
-           
+              state={{ customer: newCustomer, token : token, getDate: getDate}}
+          
+              style={{ pointerEvents: show ? "none" : "auto" }}
+            >
+              Dalej
+            </Button>
           </Form.Group>
         </Row>
       </Form>

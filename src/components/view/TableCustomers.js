@@ -284,7 +284,7 @@ const TableCustomers = (props) => {
             {props.customer
               .filter((cust) => {
                 return (
-                  (cust.data.slice(0,1)=== start) &
+                  (cust.data.slice(0,10)=== start) &
                   (cust.agreement_1 === true)
                 );
               })

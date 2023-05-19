@@ -1,8 +1,8 @@
 import React from "react";
 import "../css/Action.css";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { Container, Form, Button } from "react-bootstrap";
+
+import { Container, Button, Form } from "react-bootstrap";
 import Menu from "./Menu";
 import Footer from "./Footer";
 import { Toast, ToastContainer } from "react-bootstrap";
@@ -10,10 +10,34 @@ import axios from "axios";
 
 const Action = (props) => {
   const [show, setShow] = useState(false);
-  const [customer, setCustomer] = useState({});
+  const [customer, setCustomer] = useState(props.state.customer);
+  const [token, setToken] = useState(props.state.token);
+  const [dataPicker, setDataPicker] = useState();
+  const [tomorrow, setTomorrow] = useState(props.state.getDate);
+  const [selectData, setSelectData] = useState({})
 
-  let location = useLocation();
- // console.log("Jebać pis:", location.state.customer);
+  const getDatePicker = (e) => {
+   
+      let dat = e.target.value;
+      setDataPicker(dat);
+
+    
+  };
+
+  const getValue = (e) => {
+    setSelectData({
+      ...selectData,
+      [e.target.name]: e.target.value,
+   
+   
+    }
+
+    );
+
+
+  } 
+ 
+
 
   const handleSubmit = (e) => {
     // console.log("Form Submitted");
@@ -27,11 +51,14 @@ const Action = (props) => {
     const data = new FormData();
     data.append("customerFiles", file);
     axios.post(url, data, config).then((response) => {
-     // console.log(response);
+      console.log("dodano, nazwa pliku,", file.name);
+      console.log("data selected: ", dataPicker);
+      console.log("data Jutro: ", tomorrow);
+      console.log("Użytkownik", token)
+      console.log("Klient", customer);;
+      console.log("sposób, kierunek, informacje : ", selectData)
     });
   };
-
-
 
   return (
     <Container>
@@ -52,7 +79,7 @@ const Action = (props) => {
             />
             <strong className="me-auto">Bootstrap</strong>
           </Toast.Header>
-          <Toast.Body className={'text-white'}>Dodano zadanie</Toast.Body>
+          <Toast.Body className={"text-white"}>Dodano zadanie</Toast.Body>
         </Toast>
       </ToastContainer>
 
@@ -61,12 +88,14 @@ const Action = (props) => {
       <div className="formAction">
         <div className="inputFlex">
           <div className="inputBlock">
-            <p className="textAction">Kierunek kontaktu :</p>
+            <p className="tittle">Kierunek kontaktu :</p>
+
             <select
               className="selectAction"
-              name="kierunek"
+              name="direction"
               as="select"
-              id="kierunek"
+              id="directionAdd"
+             onChange={getValue}
               required
             >
               <option>----- Kierunek kontaktu-----</option>
@@ -94,24 +123,26 @@ const Action = (props) => {
             </select>
           </div>
           <div className="inputBlock">
-            <p className="textAction">Sposób kontaktu :</p>
+            <p className="tittle">Sposób kontaktu :</p>
+
             <select
               className="selectAction"
               as="select"
-              name="sposob"
-              id="sposob"
+              name="contactWay"
+              id="contactWayAdd"
+              onChange={getValue}
             >
               <option>------ Sposób kontaktu------</option>
-              <option value="wizytaHandlowca" name="wizytaHandlowca">
+              <option value="wizytaHandlowca" name="contactWay">
                 Wizyta handlowca u Klienta
               </option>
-              <option value="wizytaKlienta" name="wizytaKlienta">
+              <option value="wizytaKlient" name="contactWay">
                 Wizyta Klienta w firmie
               </option>
-              <option value="email" name="email">
+              <option value="email" name="contactWay">
                 Email
               </option>
-              <option value="telefon" name="telefon">
+              <option value="telefon" name="contactWay">
                 Telefon
               </option>
             </select>
@@ -119,19 +150,36 @@ const Action = (props) => {
         </div>
         <div className="inputFlex">
           <div className="inputBlock">
-            <p className="textAction">Informacje :</p>
+            <p className="tittle">Informacje :</p>
+
             <textarea
               className="inputAction"
               aria-label="With textarea"
+              id="informationAdd"
+              name="information"
+              onChange={getValue}
             ></textarea>
           </div>
           <div className="inputBlock">
             {" "}
-            <p className="textAction">Dodaj załącznik</p>
+            <p className="tittle">Dodaj załącznik</p>
+            <hr />
             <div>
               <input id="file-field" type="file" name="customerFiles" />
-              </div>
-           
+            </div>
+            <hr />
+            <p className="tittle">Wybierz datę nastepnego kontaktu</p>
+            <hr />
+            <div>
+              <Form.Group controlId="dob">
+                <Form.Control
+                  type="date"
+                  name="dob"
+                  placeholder="Date of Birth"
+                  onChange={getDatePicker}
+                />
+              </Form.Group>
+            </div>
           </div>
         </div>
 
@@ -139,7 +187,7 @@ const Action = (props) => {
           variant="outline-success"
           className="btn m-3"
           onClick={() => {
-            handleSubmit()
+            handleSubmit();
           }}
         >
           Zapisz

@@ -8,6 +8,8 @@ import "../css/NavBar.css";
 
 function NavBar(props) {
   const userToken = JSON.parse(localStorage.getItem("user"));
+ 
+
 
   return (
     <div className="getCenter">
@@ -45,7 +47,7 @@ function NavBar(props) {
           </div>
           <div>Home</div>{" "}
         </Link>
-        <Link to="/lead" className="btnFull">
+        <Link to="/lead" className="btnFull" token={userToken}>
           <div>
             <img
               className="imgMenu"
