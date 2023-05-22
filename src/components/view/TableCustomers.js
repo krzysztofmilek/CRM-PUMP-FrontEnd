@@ -15,8 +15,8 @@ const TableCustomers = (props) => {
   const [show, setShow] = useState("hidden");
   const [actions, setActions] = useState([]);
 
-  const getCustomer = (cust) => {
-    setCust(cust);
+  const getAction = (act) => {
+    setCust(act);
     if (show === "show") {
       setShow("hidden");
     } else {
@@ -24,17 +24,14 @@ const TableCustomers = (props) => {
     }
   };
 
-
   const getAct = async () => {
     const getAction = await axios.get("http://localhost:8080/action/");
-
     setActions(getAction.data);
   };
   const start = new Date().toISOString().substring(0, 10);
-  console.log(actions);
 
   useEffect(() => {
-      getAct();
+    getAct();
     // eslint-disable-next-line
   }, []);
 
@@ -113,46 +110,7 @@ const TableCustomers = (props) => {
                   </InputGroup>
                 </Form.Group>
               </Row>
-              <Row className="mb-3">
-                <Form.Group
-                  as={Col}
-                  md="4" //controlId="validationCustom07"
-                >
-                  <Form.Label className="textCustomer">Kod pocztowy</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Kod pocztowy"
-                    name="zip"
-                    id="zip"
-                    value={cust.zip}
-                  />
-                </Form.Group>
-                <Form.Group
-                  as={Col}
-                  md="4" //controlId="validationCustom08"
-                >
-                  <Form.Label className="textCustomer">Miasto</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Miasto"
-                    name="city"
-                    id="city"
-                    value={cust.city}
-                  />
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                  <Form.Label className="textCustomer">
-                    Ulica, nr domu i mieszkania
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Ulica, nr domu i mieszkania"
-                    name="street"
-                    id="street"
-                    value={cust.street}
-                  />
-                </Form.Group>
-              </Row>
+
               <Row className="mb-1">
                 <Form.Group as={Col} md="6"></Form.Group>
 
@@ -177,7 +135,7 @@ const TableCustomers = (props) => {
                       src="https://img.icons8.com/cotton/64/null/cancel--v2.png"
                       alt="Szczegóły"
                       onClick={(e) => {
-                        getCustomer(cust);
+                        getAction(cust);
                       }}
                     />
                   </OverlayTrigger>
@@ -187,25 +145,23 @@ const TableCustomers = (props) => {
           </div>
         </span>
         <hr />
-     
+
         <p className="getLeft">PRZETERMINOWANE ZADANIA </p>
 
         <Table variant="light" hover bordered size="sm">
           <tbody>
             {actions
-              .filter((cust) => {
-                return (
-                  (cust.nextContactData < start)
-                );
+              .filter((act) => {
+                return act.nextContactData.slice(0, 10) < start;
               })
-              .map((cust, index) => (
+              .map((act, index) => (
                 <tr className="red" key={index}>
-                <td className="col-3 tableFontSize">{cust.nextContactData.slice(0,10)}</td>
-                  <td className="col-2 tableFontSize">{cust.user}</td>
-                  <td className="col-2 tableFontSize">{cust.customer}</td>
-                  <td className="col-2 tableFontSize">{cust.customer}
-                
+                  <td className="col-3 tableFontSize">
+                    {act.nextContactData.slice(0, 10)}
                   </td>
+                  <td className="col-2 tableFontSize">{act.user}</td>
+                  <td className="col-2 tableFontSize">{act.customer.name}</td>
+                  <td className="col-2 tableFontSize">{act.information} </td>
 
                   <td className="col-3 getCenter">
                     <OverlayTrigger
@@ -222,7 +178,7 @@ const TableCustomers = (props) => {
                         src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/35/null/external-user-cv-resume-flatart-icons-outline-flatarticons.png"
                         alt="Szczegóły"
                         onClick={(e) => {
-                          getCustomer(cust);
+                          getAction(act);
                         }}
                       />
                     </OverlayTrigger>
@@ -235,19 +191,17 @@ const TableCustomers = (props) => {
         <Table variant="light" striped bordered hover className="fullWidth">
           <tbody>
             {actions
-              .filter((cust) => {
-                return (
-                  (cust.nextContactData === start)
-                );
+              .filter((act) => {
+                return act.nextContactData.slice(0, 10) === start;
               })
-              .map((cust, index) => (
+              .map((act, index) => (
                 <tr key={index}>
-                  <td className="col-3 tableFontSize">{cust.nextContactData}</td>
-                  <td className="col-2 tableFontSize">{cust.user}</td>
-                  <td className="col-2 tableFontSize">{cust.customer}</td>
-                  <td className="col-2 tableFontSize">{cust.customer}
-                
+                  <td className="col-3 tableFontSize">
+                    {act.nextContactData.slice(0, 10)}
                   </td>
+                  <td className="col-2 tableFontSize">{act.user}</td>
+                  <td className="col-2 tableFontSize">{act.customer.name}</td>
+                  <td className="col-2 tableFontSize">{act.information} </td>
                   <td className="col-3 getCenter">
                     <OverlayTrigger
                       key="top"
@@ -263,7 +217,7 @@ const TableCustomers = (props) => {
                         src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/35/null/external-user-cv-resume-flatart-icons-outline-flatarticons.png"
                         alt="Szczegóły"
                         onClick={(e) => {
-                          getCustomer(cust);
+                          getAction(cust);
                         }}
                       />
                     </OverlayTrigger>
@@ -277,19 +231,17 @@ const TableCustomers = (props) => {
         <Table variant="light" striped bordered hover className="fullWidth">
           <tbody>
             {actions
-              .filter((cust) => {
-                return (
-                  (cust.nextContactData> start)
-                );
+              .filter((act) => {
+                return act.nextContactData.slice(0, 10) > start;
               })
-              .map((cust, index) => (
+              .map((act, index) => (
                 <tr key={index}>
-                  <td className="col-3 tableFontSize">{cust.nextContactData}</td>
-                  <td className="col-2 tableFontSize">{cust.user}</td>
-                  <td className="col-2 tableFontSize">{cust.customer}</td>
-                  <td className="col-2 tableFontSize">{cust.customer}
-                
+                  <td className="col-3 tableFontSize">
+                    {act.nextContactData.slice(0, 10)}
                   </td>
+                  <td className="col-2 tableFontSize">{act.user}</td>
+                  <td className="col-2 tableFontSize">{act.customer.name}</td>
+                  <td className="col-2 tableFontSize">{act.information} </td>
                   <td className="col-3 getCenter">
                     <OverlayTrigger
                       key="top"
@@ -305,7 +257,7 @@ const TableCustomers = (props) => {
                         src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/35/null/external-user-cv-resume-flatart-icons-outline-flatarticons.png"
                         alt="Szczegóły"
                         onClick={(e) => {
-                          getCustomer(cust);
+                          getAction(cust);
                         }}
                       />
                     </OverlayTrigger>

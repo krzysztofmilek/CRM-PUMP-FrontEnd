@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 
 const Logout = () => {
-c
+
     const navigate = useNavigate();
 
     const logout =() =>{
