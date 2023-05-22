@@ -42,7 +42,7 @@ const CustomerCard = (props) => {
       zip: addCustomer.zip,
       street: addCustomer.street,
       city: addCustomer.city,
-      user: userId,
+      //user: userId,
     };
 
     const newCustomerRes = await axios.post(
