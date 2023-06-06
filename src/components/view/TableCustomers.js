@@ -1,34 +1,53 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
-import { Form, Row, Col, InputGroup, Button } from "react-bootstrap";
+
 import { Container } from "react-bootstrap";
-import AnaliticUserTop from "./AnaliticUserTop";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import Menu from "./Menu";
 import "../css/TableCustomers.css";
 import Footer from "./Footer";
 import axios from "axios";
+import ActionInfo from "./ActionInfo";
+import OverlayTrig from "../overLay/OverlayTrig";
 
 const TableCustomers = (props) => {
-  const [cust, setCust] = useState({});
-  const [show, setShow] = useState("hidden");
   const [actions, setActions] = useState([]);
+  const [idAction, setIdAction] = useState({});
+  const [showAction, setShowAction] = useState(true);
+  const [showAttachment, setShowAttachment] = useState(true);
+  const [showOffer, setShowOffer] = useState(true);
+  const [showWindow, setShowWindow] = useState("hidden");
 
-  const getAction = (act) => {
-    setCust(act);
-    if (show === "show") {
-      setShow("hidden");
+  const getIdUser = JSON.parse(localStorage.getItem("user"));
+  const start = new Date().toISOString().substring(0, 10);
+
+  const getDataAction = (act) => {
+    setIdAction(act);
+    setShowAction(false);
+    setShowWindow("show");
+
+    /* console.log(act.fileName);
+    if (act.fileName === undefined) {
+      setShowAttachment(true);
     } else {
-      setShow("show");
-    }
+      setShowAttachment(false);  } */
+
+    act.fileName === undefined
+      ? setShowAttachment(true)
+      : setShowAttachment(false);
+
+    act.nameOffer === undefined ? setShowOffer(true) : setShowOffer(false);
+
+    /*     if (act.nameOffer === undefined) {
+      setShowOffer(true);
+    } else {
+      setShowOffer(false);
+    } */
   };
 
-  const getAct = async () => {
+  const getAct = async (e) => {
     const getAction = await axios.get("http://localhost:8080/action/");
     setActions(getAction.data);
   };
-  const start = new Date().toISOString().substring(0, 10);
 
   useEffect(() => {
     getAct();
@@ -39,228 +58,127 @@ const TableCustomers = (props) => {
     <Container>
       <Menu />
 
-      <div className="up">
-        <AnaliticUserTop />
-      </div>
       <div className="down ">
-        <span className={show}>
+        <span className={showWindow}>
           <div>
             <p className="title">Przeglądaj zadania</p>
             <hr />
-            <Form className="getLeft">
-              <Row className="mb-3">
-                <Form.Group as={Col} md="4">
-                  <Form.Label className="textCustomer">
-                    Imię nazwisko osoby kontaktowej
-                  </Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    placeholder="imię i nazwisko"
-                    name="name"
-                    id="name"
-                    value={cust.name}
-                  />
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                  <Form.Label className="textCustomer">Nazwa firmy </Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Nazwa firmy"
-                    name="nameCompany"
-                    id="nameCompany"
-                    value={cust.nameCompany}
-                  />
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                  <Form.Label className="textCustomer">NIP</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="NIP"
-                    name="NIP"
-                    id="NIP"
-                    value={cust.NIP}
-                  />
-                </Form.Group>
-              </Row>
-              <Row className="mb-3">
-                <Form.Group as={Col} md="4">
-                  <Form.Label className="textCustomer">Telefon</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    placeholder="Telefon"
-                    name="phone"
-                    id="phone"
-                    value={cust.phone}
-                  />
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                  <Form.Label className="textCustomer">Adres e-mail</Form.Label>
-                  <InputGroup hasValidation>
-                    <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                    <Form.Control
-                      type="text"
-                      placeholder="Adres e-mail"
-                      aria-describedby="inputGroupPrepend"
-                      name="email"
-                      id="email"
-                      value={cust.email}
-                    />
-                  </InputGroup>
-                </Form.Group>
-              </Row>
 
-              <Row className="mb-1">
-                <Form.Group as={Col} md="6"></Form.Group>
-
-                <Form.Group as={Col} md="2" className="taskButtons">
-                  <Button variant="outline-success">Zapisz</Button>
-                </Form.Group>
-                <Form.Group as={Col} md="2" className="taskButtons">
-                  <Button variant="outline-success">Dalej</Button>
-                </Form.Group>
-
-                <Form.Group as={Col} md="1"></Form.Group>
-                <Form.Group as={Col} md="1" className="taskButtonsRightMobile">
-                  <OverlayTrigger
-                    key="top"
-                    placement="top"
-                    overlay={
-                      <Tooltip id="tooltip-top">Zamknij okno zadania</Tooltip>
-                    }
-                  >
-                    <img
-                      className="imgTable"
-                      src="https://img.icons8.com/cotton/64/null/cancel--v2.png"
-                      alt="Szczegóły"
-                      onClick={(e) => {
-                        getAction(cust);
-                      }}
-                    />
-                  </OverlayTrigger>
-                </Form.Group>
-              </Row>
-            </Form>
+            <ActionInfo
+              idAction={idAction}
+              showAction={showAction}
+              showAttachment={showAttachment}
+              showOffer={showOffer}
+            />
           </div>
         </span>
         <hr />
 
-        <p className="getLeft">PRZETERMINOWANE ZADANIA </p>
+        <p className="getLeft title">PRZETERMINOWANE ZADANIA </p>
 
         <Table variant="light" hover bordered size="sm">
           <tbody>
             {actions
               .filter((act) => {
-                return act.nextContactData.slice(0, 10) < start;
+                return (
+                  act.nextContactData.slice(0, 10) < start &&
+                  act.user._id === getIdUser.id_user &&
+                  act.status === "open"
+                );
               })
               .map((act, index) => (
                 <tr className="red" key={index}>
-                  <td className="col-3 tableFontSize">
+                  <td className="col-1 tableFontSize">
                     {act.nextContactData.slice(0, 10)}
                   </td>
-                  <td className="col-2 tableFontSize">{act.user}</td>
-                  <td className="col-2 tableFontSize">{act.customer.name}</td>
-                  <td className="col-2 tableFontSize">{act.information} </td>
+                  <td className="col-2 tableFontSize">{act.user.name}</td>
+                  <td className="col-2 tableFontSize">{act.customer?.name}</td>
+                  <td className="col-1 tableFontSize">{act.customer?.phone}</td>
+                  <td className="col-5 tableFontSize">
+                    {act.information.slice(0, 100)}{" "}
+                  </td>
 
-                  <td className="col-3 getCenter">
-                    <OverlayTrigger
-                      key="top"
-                      placement="top"
-                      overlay={
-                        <Tooltip id="tooltip-top">
-                          Zobacz szczegóły zadania
-                        </Tooltip>
-                      }
-                    >
-                      <img
-                        className="imgTable"
-                        src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/35/null/external-user-cv-resume-flatart-icons-outline-flatarticons.png"
-                        alt="Szczegóły"
-                        onClick={(e) => {
-                          getAction(act);
-                        }}
-                      />
-                    </OverlayTrigger>
+                  <td className="col-1 getCenter">
+                    <OverlayTrig
+                      imagePath="https://img.icons8.com/external-flatart-icons-outline-flatarticons/35/null/external-user-cv-resume-flatart-icons-outline-flatarticons.png"
+                      toltip="Zobacz szczegóły zadania"
+                      onClick={(e) => {
+                        getDataAction(act);
+                      }}
+                    />
+
+                   
                   </td>
                 </tr>
               ))}
           </tbody>
         </Table>
-        <p className="getLeft"> DZISIEJSZE ZADANIA</p>
+        <p className="getLeft title"> DZISIEJSZE ZADANIA</p>
         <Table variant="light" striped bordered hover className="fullWidth">
           <tbody>
             {actions
               .filter((act) => {
-                return act.nextContactData.slice(0, 10) === start;
+                return (
+                  act.nextContactData.slice(0, 10) === start &&
+                  act.user._id === getIdUser.id_user &&
+                  act.status === "open"
+                );
               })
               .map((act, index) => (
                 <tr key={index}>
-                  <td className="col-3 tableFontSize">
+                  <td className="col-1 tableFontSize">
                     {act.nextContactData.slice(0, 10)}
                   </td>
-                  <td className="col-2 tableFontSize">{act.user}</td>
-                  <td className="col-2 tableFontSize">{act.customer.name}</td>
-                  <td className="col-2 tableFontSize">{act.information} </td>
-                  <td className="col-3 getCenter">
-                    <OverlayTrigger
-                      key="top"
-                      placement="top"
-                      overlay={
-                        <Tooltip id="tooltip-top">
-                          Zobacz szczegóły zadania
-                        </Tooltip>
-                      }
-                    >
-                      <img
-                        className="imgTable"
-                        src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/35/null/external-user-cv-resume-flatart-icons-outline-flatarticons.png"
-                        alt="Szczegóły"
-                        onClick={(e) => {
-                          getAction(cust);
-                        }}
-                      />
-                    </OverlayTrigger>
+                  <td className="col-2 tableFontSize">{act.user.name}</td>
+                  <td className="col-2 tableFontSize">{act.customer?.name}</td>
+                  <td className="col-1 tableFontSize">{act.customer?.phone}</td>
+                  <td className="col-5 tableFontSize">
+                    {act.information.slice(0, 100)}{" "}
+                  </td>
+                  <td className="col-1 getCenter">
+                  <OverlayTrig
+                      imagePath="https://img.icons8.com/external-flatart-icons-outline-flatarticons/35/null/external-user-cv-resume-flatart-icons-outline-flatarticons.png"
+                      toltip="Zobacz szczegóły zadania"
+                      onClick={(e) => {
+                        getDataAction(act);
+                      }}
+                    />
                   </td>
                 </tr>
               ))}
           </tbody>
         </Table>
 
-        <p className="getLeft"> NADCHODZĄCE ZADANIA</p>
+        <p className="getLeft title"> NADCHODZĄCE ZADANIA</p>
         <Table variant="light" striped bordered hover className="fullWidth">
           <tbody>
             {actions
               .filter((act) => {
-                return act.nextContactData.slice(0, 10) > start;
+                return (
+                  act.nextContactData.slice(0, 10) > start &&
+                  act.user._id === getIdUser.id_user &&
+                  act.status === "open"
+                );
               })
               .map((act, index) => (
                 <tr key={index}>
-                  <td className="col-3 tableFontSize">
-                    {act.nextContactData.slice(0, 10)}
+                  <td className="col-1 tableFontSize">
+                    {act.nextContactData?.slice(0, 10)}
                   </td>
-                  <td className="col-2 tableFontSize">{act.user}</td>
-                  <td className="col-2 tableFontSize">{act.customer.name}</td>
-                  <td className="col-2 tableFontSize">{act.information} </td>
-                  <td className="col-3 getCenter">
-                    <OverlayTrigger
-                      key="top"
-                      placement="top"
-                      overlay={
-                        <Tooltip id="tooltip-top">
-                          Zobacz szczegóły zadania
-                        </Tooltip>
-                      }
-                    >
-                      <img
-                        className="imgTable"
-                        src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/35/null/external-user-cv-resume-flatart-icons-outline-flatarticons.png"
-                        alt="Szczegóły"
-                        onClick={(e) => {
-                          getAction(cust);
-                        }}
-                      />
-                    </OverlayTrigger>
+                  <td className="col-2 tableFontSize">{act.user.name}</td>
+                  <td className="col-2 tableFontSize">{act.customer?.name}</td>
+                  <td className="col-1 tableFontSize">{act.customer?.phone}</td>
+                  <td className="col-5 tableFontSize">
+                    {act.information?.slice(0, 100)}{" "}
+                  </td>
+                  <td className="col-1 getCenter">
+                      <OverlayTrig
+                      imagePath="https://img.icons8.com/external-flatart-icons-outline-flatarticons/35/null/external-user-cv-resume-flatart-icons-outline-flatarticons.png"
+                      toltip="Zobacz szczegóły zadania - zadania nadchodzące"
+                      onClick={(e) => {
+                      getDataAction(act);
+                      }}
+                    />
                   </td>
                 </tr>
               ))}

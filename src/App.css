@@ -129,7 +129,7 @@ h4 {
 }
 
 .tableFontSize {
-  font-size: 0.85em;
+  font-size: 1em;
 }
 
 .input-group {
@@ -139,6 +139,15 @@ h4 {
   vertical-align: center;
   justify-content: center;
   border: 0px solid #000;
+}
+.titleInput{
+  font-size: 0.9 em;
+  text-transform: uppercase;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  font-weight: 500;
+
 }
 
 .input-group-addon {
@@ -185,6 +194,7 @@ h3 {
 .btn {
   border-radius: 50px;
   min-width: 200px;
+ 
 }
 .input-search:focus {
   outline: none;
@@ -211,10 +221,12 @@ h3 {
 }
 
 @media all and (max-width: 992px) {
-
+  .App {width: 100%;
+  min-height: 100vh;}
   .signUpPanel {
     width: 300px !important;
   }
+  .show {display: true;}
   li {
     text-align: left !important;
   }
@@ -231,6 +243,8 @@ h3 {
   .inputLogin {
     width: 180px !important;
   }
+  .btn{
+  margin-bottom: 5px;}
 
 
 }

@@ -78,6 +78,16 @@ function NavBar(props) {
           </div>
           <div> Giełda</div>{" "}
         </Link>
+        <Link to="/chance" className="btnFull">
+          <div>
+            <img
+              className="imgMenu"
+              src="https://img.icons8.com/cotton/64/cloud-storage.png" 
+              alt="analitics"
+            />
+          </div>
+          <div> Magazyn</div>{" "}
+        </Link>
 
         {userToken.access ? (
           <Link to="/analitics" className="btnFull">

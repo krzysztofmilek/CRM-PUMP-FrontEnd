@@ -7,7 +7,14 @@
     padding-bottom:20px
 }
 
-
+.title {
+  font-size: 1em;
+  text-transform: uppercase;
+  margin-top:25px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  font-weight: 700;
+}
 
 @media all and (max-width:992px) {
   .taskButtons{
@@ -15,8 +22,9 @@
     padding-bottom:5px;
     text-align:center;
 
-  }
 
+  }
+ 
   .taskButtonsRightMobile{
     padding-top:5px;
     padding-bottom:5px;
@@ -24,4 +32,22 @@
     text-align:right;
   }
    
+   
+    
+      tr td:nth-of-type(2) {
+        display: none;
+      }
+      tr td:nth-of-type(3) {
+        display: true;
+      }
+      tr td:nth-of-type(5) {
+        display: none;
+      }
+      tr td:nth-of-type(4) {
+        display: none;
+      }
+    
+   
+    
+    
     }

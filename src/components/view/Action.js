@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/Action.css";
+//import "../css/Action.css";
 import { useState } from "react";
 
 import { Container, Button, Form } from "react-bootstrap";
@@ -10,11 +10,14 @@ import axios from "axios";
 
 const Action = (props) => {
   const [show, setShow] = useState(false);
-  const [customer, setCustomer] = useState(props.state.customer);
-  const [token, setToken] = useState(props.state.token);
   const [dataPicker, setDataPicker] = useState();
-  const [tomorrow, setTomorrow] = useState(props.state.getDate);
   const [selectData, setSelectData] = useState({});
+
+  /* const [token, setToken] = useState(props.state.token);
+  const [tomorrow, setTomorrow] = useState(props.state.getDate); */
+  const customer = props.state.custome
+   const token = props.state.token;
+  const tomorrow = props.state.getDate;
 
   const getDatePicker = (e) => {
     let dat = e.target.value;
@@ -27,9 +30,11 @@ const Action = (props) => {
       [e.target.name]: e.target.value,
     });
   };
+  
+
+  
 
   const handleSubmit = (e) => {
-  
     const file = document.getElementById("file-field").files[0];
     const url = "http://localhost:8080/uploadCustomerFiles";
     const config = {
@@ -40,38 +45,27 @@ const Action = (props) => {
     const data = new FormData();
     data.append("customerFiles", file);
     axios.post(url, data, config)
-
-//dodoac status open
-
-
     const pos = {
-      
+     
       contactData:tomorrow,
       nextContactData:dataPicker,
       information: selectData.information,
       conatactWay:selectData.conatactWay,
       direction:selectData.direction,
-      fileName: file.name,
+      fileName: file?.name,
       status:'open',
       user: token.id_user,
       customer:customer._id,
      
     }
 
-    const newActionRes =  axios.post(
+    axios.post(
       "http://localhost:8080/action/add",
       pos
+      
     );
-    console.log(newActionRes)
 
-
-
-      console.log("dodano, nazwa pliku,", file.name);
-      console.log("data selected: ", dataPicker);
-      console.log("data Jutro: ", tomorrow);
-      console.log("Użytkownik", token);
-      console.log("Klient", customer);
-      console.log("sposób, kierunek, informacje : ", selectData);
+     
     
   };
 
@@ -180,7 +174,7 @@ const Action = (props) => {
             <p className="tittle">Dodaj załącznik</p>
             <hr />
             <div>
-              <input id="file-field" type="file" name="customerFiles" />
+              <input id="file-field" type="file" name="customerFiles"   />
             </div>
             <hr />
             <p className="tittle">Wybierz datę nastepnego kontaktu</p>

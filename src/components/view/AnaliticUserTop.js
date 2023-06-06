@@ -47,8 +47,7 @@ function AnaliticUserTop() {
           </Form.Select>
           <br />
           <ul>
-            <li> ilość wykonanych telefonów:</li>
-            <li> ilość wysłanych email:</li>
+            <li> ilość wykonanych kontaktów:</li>
             <li> ilość ofert: </li>
             <li> ilość sprzedaży:</li>
             <li> Skuteczność:</li>
@@ -64,14 +63,14 @@ function AnaliticUserTop() {
             <Table variant="light" striped bordered hover className="fullWidth">
           <tbody>
             {data
-              .filter((cust) => {
+              .filter((act) => {
                 return (
-                  (cust.name === userName) 
+                  (act.name === userName) 
                 );
               })
-              .map((cust, index) => (
+              .map((act, index) => (
                 <tr key={index}>
-                  <td>Sprzedaż : {cust[month] }</td>
+                  <td>Sprzedaż : {act[month] }</td>
                 
                 
                 </tr>
@@ -96,8 +95,8 @@ function AnaliticUserTop() {
           <h4>Wskaźniki KPI</h4>
           <hr />
           <ul>
-            <li>Telefony/Oferty:</li>
-            <li>Telefony/Sprzedaż:</li>
+            <li>Kontakty/Oferty:</li>
+            <li>Kontakty/Sprzedaż:</li>
             <li>Oferty/Sprzedaż:</li>
           </ul>
         </div>

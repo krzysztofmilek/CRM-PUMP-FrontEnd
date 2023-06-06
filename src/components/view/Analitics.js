@@ -1,14 +1,18 @@
 import React from 'react';
 import NavBar from './NavBar';
+import AnaliticUserTop from './AnaliticUserTop';
+import { Container } from "react-bootstrap";
 const Analitics = () => {
 
   return (
     
-      <div>
+      <Container>
         <NavBar />
-  Panel Analitics
-     
+        <div className="up">
+        <AnaliticUserTop />
       </div>
+     
+      </Container>
   )
 
 }

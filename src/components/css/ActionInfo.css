@@ -6,7 +6,7 @@ textarea {
     margin-top: 0px;
     margin-bottom: 15px;
     box-sizing: border-box;
-    border: 2px solid #ccc;
+    border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #f8f8f8;
     font-size: 16px;
@@ -20,12 +20,13 @@ textarea {
 }
 
   .formAction{
-    min-height: 41vh;
+
     margin-top: 25px;
+    border: 0px solid green;
   }
   .inputAction {
     width: 90%;
-    padding: 12px 20px;
+    padding: .35rem 0.75rem;
      display: flex;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -46,12 +47,59 @@ textarea {
     width: 90%;
     padding: 12px 20px;
      display: inline-block;
-    border: 1px solid #ccc;
+    border: 0px solid red;
     border-radius: 4px;
     box-sizing: border-box;
   }
   
+  .textCustomer{
+    font-size: 1.3em;
+    font-weight: 500;
+}
+.getLeft {
+    text-align: left;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-size: 0.8em;
+    font-weight: 700;
+  }
 
+
+  .getCenterActionInfo {
+    text-align: center;
+    padding: 0px;
+    margin-top: 20px;
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+  .titleActionInfo {
+    font-size: 1em;
+    text-transform: uppercase;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-weight: 700;
+  }
+
+  .titleInputActionInfo{
+    font-size: 0.9em !important;
+    text-transform: uppercase;
+    margin-top: 5px !important;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+
+
+  }
+
+
+
+  
+.showTask{
+display:block;
+  }
+  .hiddenTask{
+    display:none;
+  }
   
  .inputAction:hover {
     background-color: #f5f5f5;
@@ -65,10 +113,10 @@ textarea {
 
   @media all and (max-width: 992px) {
 
-  form{
+/*   form{
     height: 100vh;
     margin-top: 25px;
-  }
+  } */
   .inputAction {
     width: 100%;
   }

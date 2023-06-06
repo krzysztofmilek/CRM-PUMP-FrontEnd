@@ -6,6 +6,11 @@
     justify-content: center;
   
   }
+  li{
+    font-size: 1em;
+    font-weight: 300 !important;
+
+  }
   .analiticUserContainer {
     border: 1px solid gray;
    margin-bottom: 25px;
@@ -14,10 +19,8 @@
     border-radius: 15px;
     min-height: 300px;
     width: 292px;
-
-
-
   }
+  
   .up {
     padding-top: 10px;
     border: 0px solid red;

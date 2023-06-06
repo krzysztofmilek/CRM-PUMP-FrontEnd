@@ -56,9 +56,8 @@ if(!onchangeData) return;
     setPlain(updatePlainData.data);
     getData();
     setShow(true);
-    console.log("1", onchangeData)
     setOnchangeData(null)
-    console.log("2", onchangeData)
+
 
     ;}
 
