@@ -6,9 +6,8 @@ import { Table } from "react-bootstrap";
 import {
   Toast,
   ToastContainer,
-  Tooltip,
-  OverlayTrigger,
 } from "react-bootstrap";
+import OverlayTrig from "../overLay/OverlayTrig";
 
 import ModalDeletePlain from '../modals/ModalDeletePlain'
 
@@ -248,18 +247,14 @@ if(!onchangeData) return;
                   use.december}
               </td>
               <td>
-                <OverlayTrigger
-                  key="top"
-                  placement="top"
-                  overlay={<Tooltip id="tooltip-top">Ustaw plan</Tooltip>}
-                >
-                  <img
-                    className="imgUserTable"
-                    src="https://img.icons8.com/ultraviolet/40/null/checked--v1.png"
-                    alt="Usuń"
-                    onClick={() => updatePlain(use._id)}
-                  />
-                </OverlayTrigger>
+              <OverlayTrig
+        imagePath="https://img.icons8.com/ultraviolet/40/null/checked--v1.png"
+        toltip="Ustaw plan"
+          onClick={(e) => {
+          updatePlain(use._id);
+        }}
+      />
+              
               </td>
               <td>
               <ModalDeletePlain post={use} getData={getData} />

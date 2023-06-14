@@ -1,12 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import {
-  Table,
-  Button,
-  Container,
-  OverlayTrigger,
-  Tooltip,
-} from "react-bootstrap";
+import { Table, Button, Container } from "react-bootstrap";
 import axios from "axios";
 import ModalDeleteCustomer from "../modals/ModalDeleteCustomer";
 import ModalEditCustomer from "../modals/ModalEditCustomer";
@@ -14,15 +8,19 @@ import Menu from "./Menu";
 import CustomerCard from "./CustomerCard";
 import "../css/Customers.css";
 import Footer from "./Footer";
+import OverlayTrig from "../overLay/OverlayTrig";
 
 const Customers = (props) => {
   const [customers, setCustomers] = useState([]);
   const [customer, setCustomer] = useState([]);
   const [search, setSearch] = useState("");
+  const [show, setShow] = useState(false);
+  const [showButton, setShowButton] = useState(false);
 
   const getCustomers = async () => {
     const customer = await axios.get("http://localhost:8080/customer/");
     setCustomers(customer.data);
+    console.log(customers)
   };
 
   const clear = () => {
@@ -38,7 +36,8 @@ const Customers = (props) => {
 
   const getCustomerData = (cust) => {
     setCustomer(cust);
-    console.log(customer)
+   // setShow(true);
+    setShowButton(true);
   };
 
   useEffect(() => {
@@ -51,7 +50,15 @@ const Customers = (props) => {
       <div className="">
         <p className="tittle">Dodaj nowego Klienta</p>
         <hr />
-        <CustomerCard getCustomers={props.getCustomers} getCustomer={customer}/>
+        <CustomerCard
+          getCustomers={props.getCustomers}
+          getCustomer={customer}
+          show={show}
+          showButton={showButton}
+          setShow={setShow}
+          showClass="hidden"
+          showClassButton="show"
+        />
       </div>
       <div className="down">
         <p className="tittle">Wyszukaj Klienta</p>
@@ -110,22 +117,13 @@ const Customers = (props) => {
                     {cust.data.substring(0, 10)}
                   </td>
                   <td className="col-1 getCenter">
-                    <OverlayTrigger
-                      key="top"
-                      placement="top"
-                      overlay={
-                        <Tooltip id="tooltip-top">Pobierz Dane Klienta</Tooltip>
-                      }
-                    >
-                      <img
-                        className="imgTable"
-                        src="https://img.icons8.com/windows/35/null/checked-user-male--v1.png"
-                        alt="Pobierz Dane Klienta"
-                        onClick={(e) =>(
-                          getCustomerData(cust)
-                        )}
-                      />
-                    </OverlayTrigger>
+                    <OverlayTrig
+                      imagePath="https://img.icons8.com/windows/35/null/checked-user-male--v1.png"
+                      toltip="Pobierz Dane Klienta"
+                      onClick={(e) => {
+                        getCustomerData(cust);
+                      }}
+                    />
                   </td>
                   <td className="col-1 getCenter">
                     <ModalEditCustomer
@@ -134,21 +132,10 @@ const Customers = (props) => {
                     />
                   </td>
                   <td className="col-1 getCenter">
-                    <OverlayTrigger
-                      key="top"
-                      placement="top"
-                      overlay={
-                        <Tooltip id="tooltip-top">
-                          Historia Kontaktów z Klientem
-                        </Tooltip>
-                      }
-                    >
-                      <img
-                        className="imgTable"
-                        src="https://img.icons8.com/fluency-systems-regular/48/null/order-history.png"
-                        alt="Historia Klienta"
-                      />
-                    </OverlayTrigger>
+                    <OverlayTrig
+                      imagePath="https://img.icons8.com/fluency-systems-regular/48/null/order-history.png"
+                      toltip="Historia Kontaktów z Klientem"
+                    />
                   </td>
                   <td className="col-1 getCenter">
                     <ModalDeleteCustomer post={cust} getUsers={getCustomers} />

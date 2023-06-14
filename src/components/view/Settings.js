@@ -1,14 +1,17 @@
-import React from 'react'
-import NavBar from './NavBar';
+import React from "react";
+import Menu from "./Menu";
 import { Container } from "react-bootstrap";
+import "../css/Settings.css";
+import SettingsInfo from "./SettingsInfo";
+import Footer from "./Footer";
 
-export default function Settings() {
+const Settings = () => {
   return (
     <Container>
-         <NavBar />
-      Settings
-      
-      
-      </Container>
-  )
-}
+      <Menu />
+      <SettingsInfo />
+      <Footer />
+    </Container>
+  );
+};
+export default Settings;

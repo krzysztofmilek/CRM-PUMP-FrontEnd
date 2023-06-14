@@ -5,11 +5,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
-
-
-
-
-function ModalCloseActions (props) {
+function ModalCloseActions(props) {
   const [show, setShow] = useState(false);
   const [editUser, setEditUser] = useState({});
   const handleClose = () => setShow(false);
@@ -17,15 +13,12 @@ function ModalCloseActions (props) {
 
   const getUser = (e) =>
     setEditUser((prevState) => ({
-      ...prevState, 
+      ...prevState,
       [e.target.name]: e.target.value,
-      
-    })
-    
-    );
-console.log(props)
+    }));
+
   const closeAction = async () => {
-     await axios.put(
+    await axios.put(
       "http://localhost:8080/action/edit/" + props.post._id,
 
       {
@@ -36,21 +29,19 @@ console.log(props)
 
     setEditUser(props.post.idAction);
     setShow(false);
-    
   };
 
   return (
     <span>
-   <Button
-              variant="outline-success "
-             disabled={props.showAction} 
-              onClick={(e) => {
-                handleShow(false);
-              }}
-            >
-              Zamknij Lead
-            </Button>
-   
+      <Button
+        variant="outline-success "
+        disabled={props.showAction}
+        onClick={(e) => {
+          handleShow(false);
+        }}
+      >
+        Zamknij Lead
+      </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton className="modalHeaderColor">
@@ -58,20 +49,27 @@ console.log(props)
         </Modal.Header>
         <Modal.Body className="modalBodyColor">
           <Form>
-          <Form.Label>Podaj powód zamknięcia leada</Form.Label>
-              <Form.Control
-                as="select"
-                name="status"
-                id="status"
-                onChange={getUser}
-              ><option >wybierz</option>
-      
-                <option value="sold" name="status">Sprzedaż</option>
-                <option value="competition" name="status">Zakup u konkurencji</option>
-                <option value="resignation" name="status">Rezygnacja z zakupu</option>
-                <option value="other" name="status">Inne</option>
-             
-              </Form.Control>
+            <Form.Label>Podaj powód zamknięcia leada</Form.Label>
+            <Form.Control
+              as="select"
+              name="status"
+              id="status"
+              onChange={getUser}
+            >
+              <option>wybierz</option>
+              <option value="sold" name="status">
+                Sprzedaż
+              </option>
+              <option value="competition" name="status">
+                Zakup u konkurencji
+              </option>
+              <option value="resignation" name="status">
+                Rezygnacja z zakupu
+              </option>
+              <option value="other" name="status">
+                Inne
+              </option>
+            </Form.Control>
           </Form>
         </Modal.Body>
         <Modal.Footer className="modal-footer">

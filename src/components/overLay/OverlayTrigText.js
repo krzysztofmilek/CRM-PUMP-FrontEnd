@@ -3,7 +3,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
 
-const OverlayTrig = (props) => {
+const OverlayTrigText = (props) => {
 
   return (
     <OverlayTrigger 
@@ -15,16 +15,10 @@ const OverlayTrig = (props) => {
       </Tooltip>
     }
   >
-    <img
-      className="imgTable"
-      src={props.imagePath}
-      alt=" "
-      onClick={props.onClick}
-     
-    />
+    <span>{props.text}</span>
     
   </OverlayTrigger>
   )
 }
 
-export default OverlayTrig
+export default OverlayTrigText

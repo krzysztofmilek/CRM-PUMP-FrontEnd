@@ -14,7 +14,7 @@ const Lead = () => {
         <Menu />
         <p className="tittle">Dodaj nowego Klienta</p>
         <hr />
-        <CustomerCard  />
+        <CustomerCard showClassButton="hidden"/>
         <Footer />
 
     </Container>

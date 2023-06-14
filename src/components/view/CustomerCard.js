@@ -4,18 +4,23 @@ import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import axios from "axios";
 import "../css/CustomerCard.css";
 import { Link } from "react-router-dom";
-import { Toast, ToastContainer } from "react-bootstrap";
+import Toasts from "../toasts/Toasts";
+import OverlayTrigText from "../overLay/OverlayTrigText";
 
 const CustomerCard = (props) => {
   const [addCustomer, setAddCustomer] = useState({});
   const [newCustomer, setNewCustomer] = useState({});
   // eslint-disable-next-line
   const [customer, setCustomer] = useState("");
-  
+
   const [show, setShow] = useState(true);
   const [showToast, setShowToast] = useState(false);
   const [showToastAlert, setShowToastAlert] = useState(false);
+  const [showToastAlertName, setShowToastAlertName] = useState(false);
+  const [showToastAlertPhone, setShowToastAlertPhone] = useState(false);
+  const [showToastAlertEmail, setShowToastAlertEmail] = useState(false);
   const [token, setToken] = useState({});
+  const [showClass, setShowClass] = useState("show");
 
   // get full Date
   const getFD = new Date();
@@ -31,36 +36,45 @@ const CustomerCard = (props) => {
 
   const getIdUser = JSON.parse(localStorage.getItem("user"));
 
-  console.log(props.getCustomer);
-
   const add = async () => {
-    const pos = {
-      name: addCustomer.name,
-      phone: addCustomer.phone,
-      email: addCustomer.email,
-      nameCompany: addCustomer.nameCompany,
-      NIP: addCustomer.NIP,
-      data: getDate,
-      agreement_1: true,
-      zip: addCustomer.zip,
-      street: addCustomer.street,
-      city: addCustomer.city,
-      //user: userId,
-    };
-
-    const newCustomerRes = await axios.post(
-      "http://localhost:8080/customer/add",
-      pos
-    );
-    if (newCustomerRes.data.error) {
-      setShowToastAlert(true)
+    if (addCustomer.name === undefined || "") {
+      setShowToastAlertName(true);
       return;
-    }
+    } else if (addCustomer.phone === undefined) {
+      setShowToastAlertPhone(true);
+      return;
+    } else if (addCustomer.email === undefined || "") {
+      setShowToastAlertEmail(true);
+      return;
+    } else {
+      const pos = {
+        name: addCustomer.name,
+        phone: addCustomer.phone,
+        email: addCustomer.email,
+        nameCompany: addCustomer.nameCompany,
+        NIP: addCustomer.NIP,
+        data: getDate,
+        agreement_1: true,
+        zip: addCustomer.zip,
+        street: addCustomer.street,
+        city: addCustomer.city,
+        //user: userId,
+      };
 
-    setNewCustomer(newCustomerRes.data);
-    setCustomer(newCustomerRes.data);
-    setShowToast(true);
-    setShow(false);
+      const newCustomerRes = await axios.post(
+        "http://localhost:8080/customer/add",
+        pos
+      );
+      if (newCustomerRes.data.error) {
+        setShowToastAlert(true);
+        return;
+      } else {
+        setNewCustomer(newCustomerRes.data);
+        setCustomer(newCustomerRes.data);
+        setShowToast(true);
+        setShow(false);
+      }
+    }
   };
 
   const getCustomer = (e) =>
@@ -80,60 +94,61 @@ const CustomerCard = (props) => {
 
   useEffect(() => {
     setToken(getIdUser);
-
     // eslint-disable-next-line
   }, []);
 
+  console.log(props);
+  //const onClose=(() => setShowToast(false));
+
   return (
     <div className="getLeft">
-      <ToastContainer className="p-3" position="top-end" style={{ zIndex: 1 }}>
-        <Toast
-          onClose={() => setShowToast(false)}
-          show={showToast}
-          delay={2000}
-          autohide
-          bg="success"
-        >
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2 "
-              alt=""
-            />
-            <strong className="me-auto">Dodano Klienta</strong>
-          </Toast.Header>
-          <Toast.Body className={"text-white"}>
-            Aktywny przycisk DALEJ
-          </Toast.Body>
-        </Toast>
-      </ToastContainer>
+      <Toasts
+        bodyBackground="success"
+        className="text-white"
+        title="Dodawanie Klienta"
+        bodyText="Klient dodany prawidłowo"
+        showWindow={showToast}
+        setShowWindow={setShowToast}
+      />
 
-      <ToastContainer className="p-3" position="top-end" style={{ zIndex: 1 }}>
-        <Toast
-          onClose={() => setShowToastAlert(false)}
-          show={showToastAlert}
-          delay={5000}
-          autohide
-          bg="danger"
-          className="success"
-        >
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2 "
-              alt=""
-            />
-            <strong className="me-auto">UWAGA</strong>
-          </Toast.Header>
-          <Toast.Body className={"text-white"}>Klient z podanym adresem email już istnieje</Toast.Body>
-        </Toast>
-      </ToastContainer>
+      <Toasts
+        bodyBackground="danger"
+        className="text-white"
+        title="UWAGA"
+        bodyText="Klient z podanym adresem email już istnieje"
+        showWindow={showToastAlert}
+        setShowWindow={setShowToastAlert}
+      />
+      <Toasts
+        bodyBackground="danger"
+        className="text-white"
+        title="UWAGA POLE WYMAGANE"
+        bodyText="Wypełnij pole z imieniem i nazwiskiem"
+        showWindow={showToastAlertName}
+        setShowWindow={setShowToastAlertName}
+      />
+      <Toasts
+        bodyBackground="danger"
+        className="text-white"
+        title="UWAGA POLE WYMAGANE"
+        bodyText="Podaj telefon"
+        showWindow={showToastAlertPhone}
+        setShowWindow={setShowToastAlertPhone}
+      />
+      <Toasts
+        bodyBackground="danger"
+        className="text-white"
+        title="UWAGA POLE WYMAGANE"
+        bodyText="Wypełnij pole Email"
+        showWindow={showToastAlertEmail}
+        setShowWindow={setShowToastAlertEmail}
+      />
 
       <Form>
         <Row className="mb-3">
           <Form.Group
             as={Col}
-            md="4" //controlId="validationCustom01"
+            md="4" // controlId="validationCustom01"
           >
             <Form.Label className="titleInput">
               <b>
@@ -143,7 +158,7 @@ const CustomerCard = (props) => {
             <Form.Control
               required
               type="text"
-             // placeholder="imię i nazwisko osoby kontaktowej"
+              // placeholder="imię i nazwisko osoby kontaktowej"
               name="name"
               id="name"
               value={addCustomer.name || props.getCustomer?.name || ""}
@@ -160,7 +175,7 @@ const CustomerCard = (props) => {
             <Form.Label className="titleInput">Nazwa firmy </Form.Label>
             <Form.Control
               type="text"
-            //  placeholder="Nazwa firmy"
+              //  placeholder="Nazwa firmy"
               name="nameCompany"
               id="nameCompany"
               value={
@@ -179,7 +194,7 @@ const CustomerCard = (props) => {
             <Form.Label className="titleInput">NIP</Form.Label>
             <Form.Control
               type="text"
-           //   placeholder="NIP"
+              //   placeholder="NIP"
               name="NIP"
               id="NIP"
               value={addCustomer.NIP || props.getCustomer?.NIP || ""}
@@ -203,7 +218,7 @@ const CustomerCard = (props) => {
             <Form.Control
               required
               type="text"
-           //   placeholder="Telefon"
+              //   placeholder="Telefon"
               name="phone"
               id="phone"
               value={addCustomer.phone || props.getCustomer?.phone || ""}
@@ -226,7 +241,7 @@ const CustomerCard = (props) => {
               <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
               <Form.Control
                 type="text"
-             //   placeholder="Adres e-mail"
+                //   placeholder="Adres e-mail"
                 aria-describedby="inputGroupPrepend"
                 name="email"
                 id="email"
@@ -247,7 +262,7 @@ const CustomerCard = (props) => {
             <Form.Label className="titleInput">Kod pocztowy</Form.Label>
             <Form.Control
               type="text"
-          //    placeholder="Kod pocztowy"
+              //    placeholder="Kod pocztowy"
               name="zip"
               id="zip"
               value={addCustomer.zip || props.getCustomer?.zip || ""}
@@ -264,7 +279,7 @@ const CustomerCard = (props) => {
             <Form.Label className="titleInput">Miasto</Form.Label>
             <Form.Control
               type="text"
-          //    placeholder="Miasto"
+              //    placeholder="Miasto"
               name="city"
               id="city"
               value={addCustomer.city || props.getCustomer?.city || ""}
@@ -280,7 +295,7 @@ const CustomerCard = (props) => {
             </Form.Label>
             <Form.Control
               type="text"
-         //     placeholder="Ulica, nr domu i mieszkania"
+              //     placeholder="Ulica, nr domu i mieszkania"
               name="street"
               id="street"
               value={addCustomer.street || props.getCustomer?.street || ""}
@@ -304,12 +319,17 @@ const CustomerCard = (props) => {
           </Form.Group>
 
           <Form.Group as={Col} md="3" className="top">
-            <Button variant="outline-success" onClick={add}>
+            <Button
+              variant="outline-success"
+              onClick={add}
+              className={props.showClass}
+            >
               Zapisz
             </Button>
           </Form.Group>
-          <Form.Group as={Col} md="1" className="top">
+          <Form.Group as={Col} md="4" className="top">
             <Button
+              className={props.showClass}
               variant="outline-success"
               as={Link}
               disabled={show}
@@ -317,8 +337,36 @@ const CustomerCard = (props) => {
               state={{ customer: newCustomer, token: token, getDate: getDate }}
               style={{ pointerEvents: show ? "none" : "auto" }}
             >
-              Dalej
+              Dalej show
             </Button>
+
+            <Button
+              className={props.showClassButton}
+              variant="outline-success"
+              as={Link}
+              disabled={!props.showButton}
+              to="/action"
+              state={{
+                customer: props.getCustomer,
+                token: token,
+                getDate: getDate,
+              }}
+              style={{
+                pointerEvents: props.show ? "none" : "auto",
+                background: props.showButton ? "green" : "white",
+                color: props.showButton ? "white" : "green",
+              }}
+            >
+              {props.showButton ? (
+                "Dalej"
+              ) : (
+                <OverlayTrigText
+                  toltip="Aby uaktywnić przycisk :  Pobierz dane Klienta"
+                  text="Dalej"
+                />
+              )}
+            </Button>
+            {/*  '{ props.showButton?  ""  : "Pobierz dane Klienta by uaktywnić button"     }`  */}
           </Form.Group>
         </Row>
       </Form>

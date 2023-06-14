@@ -4,8 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import OverlayTrig from "../overLay/OverlayTrig";
 
 function ModalEditUserPassowrd(props) {
   const [show, setShow] = useState(false);
@@ -40,22 +39,17 @@ function ModalEditUserPassowrd(props) {
 
   return (
     <div>
-    
 
-<OverlayTrigger
-        key="top"
-        placement="top"
-        overlay={<Tooltip id="tooltip-top">Zmień hasło</Tooltip>}
-      >
-        <img
-        className="imgTable"
-        src="https://img.icons8.com/external-creatype-glyph-colourcreatype/64/null/external-password-internet-security-solid-set-creatype-glyph-colourcreatype.png"
-        alt='Reset Hasła'
-        onClick={() => {
+<OverlayTrig
+        imagePath="https://img.icons8.com/external-creatype-glyph-colourcreatype/64/null/external-password-internet-security-solid-set-creatype-glyph-colourcreatype.png"
+        
+        toltip="Zmień hasło"
+        onClick={(e) => {
           handleShow(false);
         }}
       />
-      </OverlayTrigger>
+    
+
       
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton className="modalHeaderColor">

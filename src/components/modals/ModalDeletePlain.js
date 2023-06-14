@@ -3,13 +3,13 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import { useState } from "react";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import OverlayTrig from "../overLay/OverlayTrig";
 
 function ModalDeletePlain(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
 
 
   const customerDelete = async () => {
@@ -19,20 +19,14 @@ function ModalDeletePlain(props) {
   };
   return (
     <div>
-      <OverlayTrigger
-        key="top"
-        placement="top"
-        overlay={<Tooltip id="tooltip-top">Usuń Klienta</Tooltip>}
-      >
-        <img
-          className="imgTable"
-          src="https://img.icons8.com/windows/64/null/remove-user-male--v1.png"
-          alt="Usuń"
-          onClick={() => {
-            handleShow(false);
-          }}
-        />
-      </OverlayTrigger>
+       <OverlayTrig
+        imagePath="https://img.icons8.com/windows/64/null/remove-user-male--v1.png"
+        toltip="Usuń Plan"
+        onClick={(e) => {
+          handleShow(false);
+        }}
+      />
+
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

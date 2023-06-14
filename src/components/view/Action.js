@@ -1,11 +1,10 @@
 import React from "react";
 //import "../css/Action.css";
 import { useState } from "react";
-
 import { Container, Button, Form } from "react-bootstrap";
 import Menu from "./Menu";
 import Footer from "./Footer";
-import { Toast, ToastContainer } from "react-bootstrap";
+import Toasts from "../toasts/Toasts";
 import axios from "axios";
 
 const Action = (props) => {
@@ -13,10 +12,8 @@ const Action = (props) => {
   const [dataPicker, setDataPicker] = useState();
   const [selectData, setSelectData] = useState({});
 
-  /* const [token, setToken] = useState(props.state.token);
-  const [tomorrow, setTomorrow] = useState(props.state.getDate); */
-  const customer = props.state.custome
-   const token = props.state.token;
+  const customer = props.state.customer;
+  const token = props.state.token;
   const tomorrow = props.state.getDate;
 
   const getDatePicker = (e) => {
@@ -30,9 +27,6 @@ const Action = (props) => {
       [e.target.name]: e.target.value,
     });
   };
-  
-
-  
 
   const handleSubmit = (e) => {
     const file = document.getElementById("file-field").files[0];
@@ -44,53 +38,32 @@ const Action = (props) => {
     };
     const data = new FormData();
     data.append("customerFiles", file);
-    axios.post(url, data, config)
+    axios.post(url, data, config);
     const pos = {
-     
-      contactData:tomorrow,
-      nextContactData:dataPicker,
+      contactData: tomorrow,
+      nextContactData: dataPicker,
       information: selectData.information,
-      conatactWay:selectData.conatactWay,
-      direction:selectData.direction,
+      conatactWay: selectData.conatactWay,
+      direction: selectData.direction,
       fileName: file?.name,
-      status:'open',
+      status: "open",
       user: token.id_user,
-      customer:customer._id,
-     
-    }
+      customer: customer._id,
+    };
 
-    axios.post(
-      "http://localhost:8080/action/add",
-      pos
-      
-    );
-
-     
-    
+    axios.post("http://localhost:8080/action/add", pos);
   };
 
   return (
     <Container>
-      <ToastContainer className="p-3" position="top-end" style={{ zIndex: 1 }}>
-        <Toast
-          onClose={() => setShow(false)}
-          show={show}
-          delay={5000}
-          autohide
-          bg="success"
-          className="success"
-        >
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2 "
-              alt=""
-            />
-            <strong className="me-auto">Bootstrap</strong>
-          </Toast.Header>
-          <Toast.Body className={"text-white"}>Dodano zadanie</Toast.Body>
-        </Toast>
-      </ToastContainer>
+      <Toasts
+        bodyBackground="success"
+        className="text-white"
+        title="ZADANIA"
+        bodyText="Dodano nowe zadanie"
+        showWindow={show}
+        setShowWindow={setShow}
+      />
 
       <Menu />
 
@@ -174,7 +147,7 @@ const Action = (props) => {
             <p className="tittle">Dodaj załącznik</p>
             <hr />
             <div>
-              <input id="file-field" type="file" name="customerFiles"   />
+              <input id="file-field" type="file" name="customerFiles" />
             </div>
             <hr />
             <p className="tittle">Wybierz datę nastepnego kontaktu</p>

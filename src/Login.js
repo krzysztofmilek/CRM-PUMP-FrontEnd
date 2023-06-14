@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button, Container, Form, Alert } from "react-bootstrap";
 import "./components/css/Login.css";
@@ -14,7 +14,9 @@ const Login = (props) => {
   });
 
   const [loginMessage, setLoginMessage] = useState("");
+  const [errorLoginMessage, setErrorLoginMessage] = useState("");
   const navigate = useNavigate();
+
   
   const handleInputChange = (e) => {
     const target = e.target;
@@ -27,14 +29,25 @@ const Login = (props) => {
   };
   
   const handleSubmit = (e) => {
-        e.preventDefault();
+   e.preventDefault();
+   console.log(formData.email)
+   if(formData.email.length< 5){
+    setErrorLoginMessage(`Minimalna długość maila to 5 znaków`)
+   }
+   /* else if(formData.email.length > 6){
+    setErrorLoginMessage(`${formData.email} to nie jest email`)
+   } */
+   else if( formData.password.length < 4){
+    setErrorLoginMessage(`Minimalna długość hasła to 3 znaki`)
+   }else{
+    setErrorLoginMessage("")
     axios.post("http://localhost:8080/login", {
         email: formData.email,
         password: formData.password,
         })
        .then((res) => {
           if (res.data.error) {
-            console.log(res.data.error.status);
+          //  console.log(res.data.error.status);
           setLoginMessage(res.data.message);
         } else  {
            localStorage.setItem("user", JSON.stringify(res.data)); 
@@ -50,20 +63,23 @@ const Login = (props) => {
             redirectToHome()
                      
           }
-        })}
-      
-     
-  
+        })}}
+
+
 
   return (
     <Container className="signCenter" method="POST">
       <div className="signUpPanel">
-        <Form onSubmit={handleSubmit}>
+        <Form  onSubmit={handleSubmit}>
+          {errorLoginMessage 
+          && <Alert key='info' variant='danger'>{errorLoginMessage}  </Alert>
+                   
+          
+        }
           {loginMessage &&  
           <Alert key='danger' variant='danger'>   {loginMessage}  </Alert>
           
-          
-          
+                    
           }
 
           <div className="input-group">
@@ -104,15 +120,18 @@ const Login = (props) => {
               id="password"
               onChange={handleInputChange}
               value={formData.password}
-              autoComplete="true"
-            />
+            autoComplete="true"            />
           </div>
 
           <p className="getCenter">
             <Button
               className="ms-0 mt-4  buttonLogin"
               variant="outline-success"
-              onClick={handleSubmit}
+           // onClick={handleSubmit}
+            type="submit"
+            
+         
+           
             >
               Zaloguj
               <img

@@ -4,13 +4,9 @@ import axios from "axios";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-
-
+import OverlayTrig from "../overLay/OverlayTrig";
 
 function ModalEditUser(props) {
-
   const [show, setShow] = useState(false);
   const [editUser, setEditUser] = useState(null);
 
@@ -25,7 +21,6 @@ function ModalEditUser(props) {
       [e.target.position]: e.target.value,
       [e.target.email]: e.target.value,
       [e.target.login]: e.target.value,
-   
     }));
 
   const saveEditUser = async (use) => {
@@ -50,20 +45,13 @@ function ModalEditUser(props) {
 
   return (
     <div>
-      <OverlayTrigger
-        key="top"
-        placement="top"
-        overlay={<Tooltip id="tooltip-top">Edytuj użytkownika</Tooltip>}
-      >
-        <img
-          className="imgTable"
-          src="https://img.icons8.com/windows/32/000000/edit-user.png"
-          alt="Edytuj"
-          onClick={() => {
-            handleShow(false);
-          }}
-        />
-      </OverlayTrigger>
+      <OverlayTrig
+        imagePath="https://img.icons8.com/windows/32/000000/edit-user.png"
+        toltip="Edytuj Użykownika"
+        onClick={(e) => {
+          handleShow(false);
+        }}
+      />
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton className="modalHeaderColor">
@@ -113,8 +101,6 @@ function ModalEditUser(props) {
               defaultValue={props.use.email}
               onChange={getUser}
             />
-
-         
           </Form>
         </Modal.Body>
         <Modal.Footer className="modal-footer">

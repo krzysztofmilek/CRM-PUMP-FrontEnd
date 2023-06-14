@@ -35,7 +35,7 @@ textarea {
   .inputFlex{
     display: flex;
     width:100%;
-    border: 0px solid red;
+    border: 1px solid #ccc;
   }
 .inputBlock{
     display: block;

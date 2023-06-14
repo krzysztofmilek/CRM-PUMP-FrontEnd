@@ -25,23 +25,13 @@ const TableCustomers = (props) => {
     setShowAction(false);
     setShowWindow("show");
 
-    /* console.log(act.fileName);
-    if (act.fileName === undefined) {
-      setShowAttachment(true);
-    } else {
-      setShowAttachment(false);  } */
-
     act.fileName === undefined
       ? setShowAttachment(true)
       : setShowAttachment(false);
 
-    act.nameOffer === undefined ? setShowOffer(true) : setShowOffer(false);
-
-    /*     if (act.nameOffer === undefined) {
-      setShowOffer(true);
-    } else {
-      setShowOffer(false);
-    } */
+    act.nameOffer === undefined 
+    ? setShowOffer(true) 
+    : setShowOffer(false);
   };
 
   const getAct = async (e) => {

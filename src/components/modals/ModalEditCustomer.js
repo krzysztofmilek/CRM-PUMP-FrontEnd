@@ -2,10 +2,8 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import { useState } from "react";
-
+import OverlayTrig from "../overLay/OverlayTrig";
 import { Form, Button } from "react-bootstrap";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 
 function ModalEditCustomer(props) {
   const [show, setShow] = useState(false);
@@ -54,20 +52,14 @@ function ModalEditCustomer(props) {
 
   return (
     <div>
-      <OverlayTrigger
-        key="top"
-        placement="top"
-        overlay={<Tooltip id="tooltip-top">Edytuj użytkownika</Tooltip>}
-      >
-        <img
-          className="imgTable"
-          src="https://img.icons8.com/windows/32/000000/edit-user.png"
-          alt="Edytuj"
-          onClick={() => {
-            handleShow(false);
-          }}
-        />
-      </OverlayTrigger>
+      <OverlayTrig
+        imagePath="https://img.icons8.com/windows/32/000000/edit-user.png"
+        toltip="Edytuj Klienta"
+        onClick={(e) => {
+          handleShow(false);
+        }}
+      />
+
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton className="modalHeaderColor">
@@ -165,8 +157,7 @@ function ModalEditCustomer(props) {
               onChange={getCustomer}
             />
           </Form>
-
-           </Modal.Body>
+        </Modal.Body>
 
         <Modal.Footer className="modal-footer">
           <Button variant="outline-secondary" onClick={handleClose}>

@@ -4,8 +4,8 @@ import axios from "axios";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import OverlayTrig from "../overLay/OverlayTrig";
+
 
 
 
@@ -44,21 +44,17 @@ function ModalEditUserPremission (props) {
 
   return (
     <div>
-<OverlayTrigger
-        key="top"
-        placement="top"
-        overlay={<Tooltip id="tooltip-top">Zmień uprawnienia</Tooltip>}
-      >
-       <img
-       className="imgTable"
-      src="https://img.icons8.com/windows/32/null/users-settings.png"
-       
-       alt="Ustaw uprawnienia"
-        onClick={() => {
+
+<OverlayTrig
+        imagePath="https://img.icons8.com/windows/32/null/users-settings.png"
+        toltip="Zmień uprawnienia"
+        onClick={(e) => {
           handleShow(false);
         }}
       />
-      </OverlayTrigger>
+
+
+
 
    
 
